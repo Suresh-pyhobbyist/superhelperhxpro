@@ -1,4 +1,3 @@
-
 <html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +6,12 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;display=swap" rel="stylesheet">
-<link href="./static/styles.css" rel="stylesheet">
+<link href="/static/styles.css" rel="stylesheet">
 </head>
 <body>
 
 <nav>
- <img src="./assets/images/logo.svg" alt="Logo" style="width:70px; margin-right:auto;">
+ <img src="/assets/images/logo.svg" alt="Logo" style="width:70px; margin-right:auto;">
 
 <a href="#hero">Home</a>
  <a href="#how">How It Works</a>
@@ -79,7 +78,7 @@
 
 <section id="commands">
   <div class="container">
-    <h2 class="section-title">🔮 Unleash the Magic: Commands at Your Fingertips! 🦸&zwj;♂️🦸&zwj;♀️</h2>
+    <h2 class="section-title">🔮 Unleash the Magic: Commands at Your Fingertips! 🦸‍♂️🦸‍♀️</h2>
     <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: #555;">Discover the incredible capabilities SuperHelperXPro brings to your daily file management:</p>
 
     <table class="commands-table">
@@ -95,103 +94,103 @@
         <tr>
           <td data-label="Command"><pre>visualize &lt;folder&gt; [maxDepth]</pre></td>
           <td data-label="What It Does"><b>Visualize your folder tree</b> with a clear, visual map. 🌳</td>
-          <td data-label="Example"><pre>python superhxpro.py visualize "Photos" 2</pre>Shows your "Photos" folder and its subfolders up to 2 levels deep.</td>
+          <td data-label="Example"><pre>superhxpro visualize "Photos" 2</pre>Shows your "Photos" folder and its subfolders up to 2 levels deep.</td>
           <td data-label="Why It's Great">Gain instant clarity on your file structure! 🗺️</td>
         </tr>
         <tr>
           <td data-label="Command"><pre>batch-rename &lt;folder&gt; &lt;regex&gt; &lt;replacement&gt; [recursive]</pre></td>
           <td data-label="What It Does"><b>Rename multiple files</b> in one go using powerful regular expressions. 🏷️</td>
-          <td data-label="Example"><pre>python superhxpro.py batch-rename "Downloads" "(IMG_)(\d+)" "Vacation_\2" true</pre>Transforms `IMG_001.jpg` into `Vacation_001.jpg` across your "Downloads" folder, including subfolders.</td>
+          <td data-label="Example"><pre>superhxpro batch-rename "Downloads" "(IMG_)(\\d+)" "Vacation_\\2" true</pre>Transforms `IMG_001.jpg` into `Vacation_001.jpg` across your "Downloads" folder, including subfolders.</td>
           <td data-label="Why It's Great">Save hours of tedious manual renaming! ⏱️</td>
         </tr>
         <tr>
           <td data-label="Command"><pre>deep-clone &lt;src&gt; &lt;dest&gt;</pre></td>
           <td data-label="What It Does"><b>Create a perfect, complete copy</b> of an entire folder and its contents. 👯</td>
-          <td data-label="Example"><pre>python superhxpro.py deep-clone "ProjectX" "ProjectX_Backup"</pre>Creates a full duplicate of "ProjectX" as "ProjectX_Backup".</td>
+          <td data-label="Example"><pre>superhxpro deep-clone "ProjectX" "ProjectX_Backup"</pre>Creates a full duplicate of "ProjectX" as "ProjectX_Backup".</td>
           <td data-label="Why It's Great">Effortlessly back up or duplicate projects! 💾</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>conditional-move-copy &lt;src&gt; &lt;dest&gt; &lt;type&gt; &lt;value&gt; [isCopy]</pre></td>
+          <td data-label="Command"><pre>conditional-move-copy &lt;src&gt; &lt;dest&gt; &lt;type&gt; &lt;value&gt; [--copy]</pre></td>
           <td data-label="What It Does"><b>Move or copy files based on smart rules</b> like age or size. 📐</td>
-          <td data-label="Example"><pre>python superhxpro.py conditional-move-copy "Downloads" "Archive" ageDays 180 false</pre>Moves files in "Downloads" older than 180 days to your "Archive" folder.</td>
+          <td data-label="Example"><pre>superhxpro conditional-move-copy "Downloads" "Archive" ageDays 180 --copy</pre>Copies files in "Downloads" older than 180 days to "Archive". Use without `--copy` to move.</td>
           <td data-label="Why It's Great">Keep your folders tidy and relevant automatically! 🧹</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>auto-cleanup &lt;folder&gt; [criteria] [value]</pre></td>
+          <td data-label="Command"><pre>auto-cleanup &lt;folder&gt; &lt;criteria&gt; &lt;value&gt;</pre></td>
           <td data-label="What It Does"><b>Automatically delete old, temporary, or unwanted files</b> to free up space. 🗑️</td>
-          <td data-label="Example"><pre>python superhxpro.py auto-cleanup "Temp" ageDays 7</pre>Deletes files older than 7 days in your "Temp" folder.</td>
+          <td data-label="Example"><pre>superhxpro auto-cleanup "Temp" ageDays 7</pre>Deletes files older than 7 days in your "Temp" folder.</td>
           <td data-label="Why It's Great">Reclaim valuable disk space with ease! ♻️</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>deduplicate &lt;folder&gt; [dryRun:true/false]</pre></td>
-          <td data-label="What It Does"><b>Find and remove duplicate files</b> using smart hashing. 🕵️&zwj;♀️</td>
-          <td data-label="Example"><pre>python superhxpro.py deduplicate "MyPhotos" --dryRun true</pre>Shows you duplicates without deleting them first. Use `false` to delete.</td>
+          <td data-label="Command"><pre>deduplicate &lt;folder&gt; [--dry-run]</pre></td>
+          <td data-label="What It Does"><b>Find and remove duplicate files</b> using smart hashing. 🕵️‍♀️</td>
+          <td data-label="Example"><pre>superhxpro deduplicate "MyPhotos" --dry-run</pre>Shows you duplicates without deleting them first. Omit `--dry-run` to delete.</td>
           <td data-label="Why It's Great">Free up massive amounts of storage by eliminating redundant files! 🌬️</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>tag &lt;path&gt; &lt;add_tags&gt; &lt;remove_tags&gt; [recursive]</pre></td>
+          <td data-label="Command"><pre>tag-file &lt;filePath&gt; [--add &lt;tags&gt;] [--remove &lt;tags&gt;] [--recursive]</pre></td>
           <td data-label="What It Does"><b>Add or remove custom tags</b> on your files for better organization. 🏷️</td>
-          <td data-label="Example"><pre>python superhxpro.py tag "Report.pdf" "urgent,work" ""</pre>Tags `Report.pdf` as "urgent" and "work".</td>
+          <td data-label="Example"><pre>superhxpro tag-file "Report.pdf" --add "urgent,work"</pre>Tags `Report.pdf` as "urgent" and "work".</td>
           <td data-label="Why It's Great">Organize your files by custom categories and contexts! 🗂️</td>
         </tr>
         <tr>
           <td data-label="Command"><pre>search-tag &lt;folder&gt; &lt;tag&gt;</pre></td>
           <td data-label="What It Does"><b>Quickly find all files</b> with a specific tag. 🔍</td>
-          <td data-label="Example"><pre>python superhxpro.py search-tag "Projects" "urgent"</pre>Lists all files tagged "urgent" within your "Projects" folder.</td>
+          <td data-label="Example"><pre>superhxpro search-tag "Projects" "urgent"</pre>Lists all files tagged "urgent" within your "Projects" folder.</td>
           <td data-label="Why It's Great">Pinpoint important files in seconds! ⚡</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>search-meta &lt;folder&gt; &lt;json_query&gt;</pre></td>
+          <td data-label="Command"><pre>search-meta &lt;folder&gt; &lt;jsonQuery&gt;</pre></td>
           <td data-label="What It Does"><b>Perform powerful searches</b> based on file size, date, type, or custom tags and moods! 🧠</td>
-          <td data-label="Example"><pre>python superhxpro.py search-meta "." "{\"type\":\"image\",\"size\":{\"gt\":5000000}}"</pre>Finds all images larger than 5MB in the current directory.</td>
+          <td data-label="Example"><pre>superhxpro search-meta "." "{\"type\":\"image\",\"size\":{\"gt\":5000000}}"</pre>Finds all images larger than 5MB in the current directory.</td>
           <td data-label="Why It's Great">Unlock advanced search capabilities! 🔎</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>exec-script &lt;script.js/py&gt; [args]</pre></td>
+          <td data-label="Command"><pre>exec-script &lt;script.js/py&gt; [args...]</pre></td>
           <td data-label="What It Does"><b>Run your own custom JavaScript or Python scripts</b> directly through SuperHelperXPro. 🤖</td>
-          <td data-label="Example"><pre>python superhxpro.py exec-script "cleanup_script.py" '{"folder":"Temp"}'</pre>Executes your Python script `cleanup_script.py` with custom arguments.</td>
+          <td data-label="Example"><pre>superhxpro exec-script "cleanup_script.py" '{"folder":"Temp"}'</pre>Executes your Python script `cleanup_script.py` with custom arguments.</td>
           <td data-label="Why It's Great">Extend SuperHelperXPro with your own automation logic! ⚙️</td>
         </tr>
         <tr>
           <td data-label="Command"><pre>health-check &lt;folder&gt;</pre></td>
           <td data-label="What It Does"><b>Scan your folders for issues</b> like broken links or inaccessible files. 🩺</td>
-          <td data-label="Example"><pre>python superhxpro.py health-check "SharedDocs"</pre>Identifies potential problems in your shared documents.</td>
-          <td data-label="Why It's Great">Keep your data healthy and reliable! ❤️&zwj;🩹</td>
+          <td data-label="Example"><pre>superhxpro health-check "SharedDocs"</pre>Identifies potential problems in your shared documents.</td>
+          <td data-label="Why It's Great">Keep your data healthy and reliable! ❤️‍🩹</td>
         </tr>
         <tr>
           <td data-label="Command"><pre>export-map &lt;folder&gt; &lt;jsonFile&gt;</pre></td>
           <td data-label="What It Does"><b>Generate a detailed JSON catalog</b> of your entire file structure and metadata. 📊</td>
-          <td data-label="Example"><pre>python superhxpro.py export-map "ClientPhotos" "client_photos_catalog.json"</pre>Creates `client_photos_catalog.json` with all your photo details.</td>
+          <td data-label="Example"><pre>superhxpro export-map "ClientPhotos" "client_photos_catalog.json"</pre>Creates `client_photos_catalog.json` with all your photo details.</td>
           <td data-label="Why It's Great">Get a comprehensive overview of your digital assets! 📈</td>
         </tr>
         <tr>
           <td data-label="Command"><pre>apply-rules &lt;folder&gt;</pre></td>
-          <td data-label="What It Does"><b>Run predefined automation rules</b> to streamline your workflows. (Planned) ⚙️</td>
-          <td data-label="Example"><pre>python superhxpro.py apply-rules "Inbox"</pre>Triggers any custom rules set up for your "Inbox" folder.</td>
+          <td data-label="What It Does"><b>Run predefined automation rules</b> to streamline your workflows. (Conceptual) ⚙️</td>
+          <td data-label="Example"><pre>superhxpro apply-rules "Inbox"</pre>Triggers any custom rules set up for your "Inbox" folder.</td>
           <td data-label="Why It's Great">Automate your routine file management tasks! 🎯</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>schedule &lt;name&gt; &lt;delay&gt; &lt;command_args&gt;</pre></td>
-          <td data-label="What It Does"><b>Set commands to run at a later time.</b> (Planned) ⏰</td>
-          <td data-label="Example"><pre>python superhxpro.py schedule "daily_cleanup" 86400000 "auto-cleanup Temp ageDays 7"</pre>Schedules the "auto-cleanup" command to run after 24 hours (86,400,000 milliseconds).</td>
+          <td data-label="Command"><pre>schedule-command &lt;name&gt; &lt;delay_ms&gt; &lt;command_args...&gt;</pre></td>
+          <td data-label="What It Does"><b>Set commands to run at a later time.</b> (Conceptual) ⏰</td>
+          <td data-label="Example"><pre>superhxpro schedule-command "daily_cleanup" 86400000 auto-cleanup Temp ageDays 7</pre>Schedules the "auto-cleanup" command to run after 24 hours (86,400,000 milliseconds).</td>
           <td data-label="Why It's Great">Automate repetitive tasks without lifting a finger! 🗓️</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>undo [steps]</pre></td>
-          <td data-label="What It Does"><b>Revert previous actions</b> for safety and peace of mind. (Planned) ↩️</td>
-          <td data-label="Example"><pre>python superhxpro.py undo 1</pre>Attempts to reverse the last action taken.</td>
+          <td data-label="Command"><pre>undo-actions [steps]</pre></td>
+          <td data-label="What It Does"><b>Revert previous actions</b> for safety and peace of mind. (Conceptual) ↩️</td>
+          <td data-label="Example"><pre>superhxpro undo-actions 1</pre>Attempts to reverse the last action taken.</td>
           <td data-label="Why It's Great">Work with confidence, knowing you can rewind! 🔙</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>folder-mood &lt;path&gt; --set &lt;value&gt; [name]</pre></td>
+          <td data-label="Command"><pre>folder-mood-set &lt;folder&gt; &lt;mood&gt; [--name &lt;name&gt;]</pre></td>
           <td data-label="What It Does"><b>Assign emotional labels</b> to your folders. 😊</td>
-          <td data-label="Example"><pre>python superhxpro.py folder-mood "VacationPhotos" --set happy --name "SummerTrip"</pre>Labels "VacationPhotos" as "happy" and names the mood "SummerTrip".</td>
+          <td data-label="Example"><pre>superhxpro folder-mood-set "VacationPhotos" happy --name "SummerTrip"</pre>Labels "VacationPhotos" as "happy" and names the mood "SummerTrip".</td>
           <td data-label="Why It's Great">Make your folders feel special and organize by sentiment! 💖</td>
         </tr>
         <tr>
-          <td data-label="Command"><pre>folder-mood &lt;path&gt; --get [recursive] [--mood-name &lt;filter&gt;]</pre></td>
-          <td data-label="What It Does"><b>Retrieve emotional labels</b> for folders. Use `recursive` to scan subfolders, and `mood-name` to filter by mood value or name.</td>
-          <td data-label="Example"><pre>python superhxpro.py folder-mood "E:\" --get --recursive --mood-name joyful</pre>Lists all folders on drive E: with a mood value or name containing "joyful".</td>
+          <td data-label="Command"><pre>folder-mood-get &lt;folder&gt; [--recursive] [--filter-mood &lt;filter&gt;]</pre></td>
+          <td data-label="What It Does"><b>Retrieve emotional labels</b> for folders. Use `--recursive` to scan subfolders, and `--filter-mood` to filter by mood value or name.</td>
+          <td data-label="Example"><pre>superhxpro folder-mood-get "E:\" --recursive --filter-mood joyful</pre>Lists all folders on drive E: with a mood value or name containing "joyful".</td>
           <td data-label="Why It's Great">Quickly find folders based on their emotional tags! ✨</td>
         </tr>
       </tbody>
@@ -273,11 +272,11 @@
 // Typing effect for hero section
 const typewriterEl = document.getElementById('typewriter');
 const heroPhrases = [
- 'superhxpro visualize "My Holiday Pics" 3',
- 'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2"',
- 'superhxpro deep-clone "MyProject" "Backup_2024"',
- 'superhxpro auto-cleanup "Downloads" --age 90d',
- 'superhxpro search "report" --tag "important"'
+  'superhxpro visualize "My Holiday Pics" 3',
+  'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', // Added 'true' for recursive renaming
+  'superhxpro deep-clone "MyProject" "Backup_2024"',
+  'superhxpro auto-cleanup "Downloads" ageDays 90', // Changed '--age 90d' to 'ageDays 90'
+  'superhxpro search-tag "report" "important"' // Changed 'search' to 'search-tag' and '--tag' to a direct argument
 ];
 
 let heroIdx = 0;
@@ -321,13 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
 const outputEl = document.getElementById('terminalOutput');
 
 const commands = [
- { text: 'python superhxpro.py visualize "MyProject" 2', delay: 0.5 },
+ { text: 'superhxpro visualize "MyProject" 2', delay: 0.5 },
  { text: 'MyProject/', delay: 0.1 },
  { text: '├── src/', delay: 0.1 },
  { text: '└── docs/', delay: 0.1 },
- { text: 'python superhxpro.py batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', delay: 0.5 },
+ { text: 'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', delay: 0.5 },
  { text: 'Renamed 78 files.', delay: 0.3 },
- { text: 'python superhxpro.py deep-clone "Archive" "Backup_Archive"', delay: 1 },
+ { text: 'superhxpro deep-clone "Archive" "Backup_Archive"', delay: 1 },
  { text: 'Clone complete! 1.2 GB copied.', delay: 0.5 }
 ];
 
