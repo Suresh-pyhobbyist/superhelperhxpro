@@ -36,31 +36,30 @@ Discover the incredible capabilities SuperHelperXPro brings to your daily file m
 
 -----
 
-## 🚀 Get Started: It's Super Easy with Python\!
+# 🚀 Getting Started with SuperHelperHXPro
 
-No complex setups needed\! SuperHelperXPro runs perfectly with Python.
+## 📌 Installation
 
-1.  **Install Python**: If you don't have it, download and install Python 3 from [python.org](https://www.python.org/downloads/).
+Install `superhelperhxpro` globally using npm:
 
-2.  **Download SuperHelperXPro**: Get the `superhxpro.py` file from our website or repository.
+```bash
+npm install -g superhelperhxpro
+```
 
-3.  **Open Your Terminal**: Launch your command prompt (Windows) or terminal (macOS/Linux).
+## 🛠️ Usage
 
-4.  **Navigate to the Folder**: Change directory to where you saved `superhxpro.py`:
+Once installed, you can use the `superhxpro` command in your terminal:
 
-    ```bash
-    cd path/to/your/superhxpro_folder
-    ```
+```bash
+superhxpro visualize . 2
+```
+This will display your folder structure up to **2 levels deep**.
 
-5.  **Run Commands**: Now you're ready to unleash SuperHelperXPro\! Just use `python superhxpro.py` followed by your desired command:
+### 🔧 Example Commands
 
-    ```bash
-    python superhxpro.py visualize . 2
-    ```
-
-    (This will show you the current folder's structure up to 2 levels deep\!)
-
-That's it\! You're all set to transform your messy files into an organized masterpiece with **SuperHelperXPro**.
+```bash
+superhxpro batch-rename "Downloads" "(IMG_)(\d+)" "Vacation_\2" true
+```
 
 -----
 
