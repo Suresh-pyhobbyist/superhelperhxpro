@@ -1,0 +1,10 @@
+MANIFEST.in
+setup.py
+docs/readme.md
+src/superhelperhxpro/__init__.py
+src/superhelperhxpro/main.py
+src/superhelperhxpro.egg-info/PKG-INFO
+src/superhelperhxpro.egg-info/SOURCES.txt
+src/superhelperhxpro.egg-info/dependency_links.txt
+src/superhelperhxpro.egg-info/entry_points.txt
+src/superhelperhxpro.egg-info/top_level.txt

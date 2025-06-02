@@ -1,0 +1,695 @@
+:root {
+    /* Theme Colors - Updated based on user's latest request */
+    --primary: #18cae1; /* Bright Cyan */
+    --secondary: #007bff; /* Bright Blue */
+    --accent: #ff6f61; /* Vibrant Coral */
+    --bg-color: #fff; /* White */
+    --text-color: #222; /* Dark Grey */
+    --light-grey: #f8f8f8; /* Very light grey for contrast */
+    --medium-grey: #eee; /* Slightly darker grey for borders */
+    --dark-bg-card: #2c2c2c; /* For dark cards */
+    --dark-text-card: #f0f0f0; /* For dark cards text */
+    --hover-bg: rgba(0, 0, 0, 0.05); /* Light hover effect */
+
+    /* General Styling Variables */
+    --border-radius-lg: 12px;
+    --border-radius-md: 8px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --text-shadow-light: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color); /* Light background */
+    color: var(--text-color); /* Dark text for readability */
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: var(--bg-color); /* Light background for nav */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2); /* Subtle blue border */
+}
+
+nav img {
+    margin-right: auto;
+}
+
+nav a {
+    color: var(--text-color); /* Dark text for links */
+    text-decoration: none;
+    padding: 10px 18px;
+    margin-left: 15px;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--primary); /* Bright cyan on hover */
+    transform: translateY(-2px);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary); /* Bright cyan underline */
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: calc(100% - 20px);
+}
+
+nav .fab {
+    font-size: 24px;
+    margin-left: 20px;
+    color: var(--text-color); /* Dark icon color */
+}
+
+nav .fab:hover {
+    color: var(--primary); /* Bright cyan on hover */
+}
+
+/* Hero Section */
+  #hero {
+    /* width: 100vw; */
+    min-height: 80vh;
+    padding-top: 30px; /* To account for fixed nav */
+    background-color: #159eff;
+  }
+  .hero-content {
+    margin: auto;
+    width: 93%;
+    margin-top: 38px;
+    padding: 75px;
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+    text-align: left;
+    border-radius: 20px;
+    animation: slideIn 1s ease-out;
+  }
+  #hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  #hero p {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+
+#typewriter {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.4em;
+    color: var(--secondary); /* Bright blue for code text */
+    background-color: rgba(255, 255, 255, 0.8); /* Lighter background for code block */
+    padding: 15px 25px;
+    border-radius: var(--border-radius-md);
+    display: inline-block;
+    min-width: 500px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid rgba(0, 123, 255, 0.3); /* Bright blue border */
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.2); /* Lighter shadow */
+}
+
+.get-started-code-block {
+    background-color: rgba(255, 255, 255, 0.85); /* Very light background */
+    border: 1px solid var(--secondary); /* Bright blue border */
+    border-radius: var(--border-radius-md);
+    padding: 15px 20px;
+    margin-top: 25px;
+    display: inline-block;
+    width: auto;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.get-started-code-block pre {
+    margin: 0;
+    color: var(--secondary); /* Bright blue for code text */
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1em;
+    white-space: pre-wrap;
+}
+
+/* --- Section Styling (General) --- */
+section {
+    padding: 80px 5%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-color); /* Default light background for sections */
+}
+
+section:nth-of-type(even) {
+    background-color: var(--light-grey); /* Slightly darker light background for alternating sections */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 3em;
+    margin-bottom: 60px;
+    color: var(--primary); /* Bright cyan for section titles */
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--primary)); /* Blue to Cyan gradient */
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* --- How It Works Section --- */
+#how .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+#how .step {
+    background-color: rgba(255, 255, 255, 0.9); /* White/very light background */
+    border: 1px solid rgba(0, 123, 255, 0.2); /* Bright blue border */
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+#how .step:hover {
+    transform: translateY(-10px);
+    background-color: rgba(0, 123, 255, 0.1); /* Subtle blue tint on hover */
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2); /* Lighter, blue shadow */
+}
+
+#how .step i {
+    font-size: 3em;
+    color: var(--secondary); /* Bright blue for icons */
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+#how .step:hover i {
+    color: var(--primary); /* Bright cyan icon on hover */
+}
+
+#how .step h3 {
+    font-size: 1.8em;
+    color: var(--text-color); /* Dark text for headings */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#how .step p {
+    color: var(--text-color); /* Dark text for paragraphs */
+    font-size: 1.05em;
+}
+
+/* --- Commands Section --- */
+#commands .commands-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.9); /* White/very light background */
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15); /* Lighter shadow */
+}
+
+#commands .commands-table th,
+#commands .commands-table td {
+    padding: 18px 25px;
+    border: 1px solid rgba(0, 123, 255, 0.15); /* Bright blue border */
+    text-align: left;
+    color: var(--text-color); /* Dark text */
+}
+
+#commands .commands-table th {
+    background-color: rgba(0, 123, 255, 0.2); /* Bright blue with transparency */
+    color: var(--primary); /* Bright cyan for table headers */
+    font-weight: 600;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#commands .commands-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02); /* Very subtle light stripe */
+}
+
+#commands .commands-table tr:hover {
+    background-color: rgba(0, 123, 255, 0.08); /* Subtle blue tint on hover */
+    transform: scale(1.005);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#commands .commands-table td pre {
+    background-color: rgba(0, 0, 0, 0.05); /* Very light background for code */
+    border: 1px solid rgba(0, 123, 255, 0.1); /* Subtle blue border */
+    border-radius: var(--border-radius-md);
+    padding: 8px 12px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95em;
+    color: var(--secondary); /* Bright blue for code text */
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+#commands .commands-table td b {
+    color: var(--primary); /* Bright cyan for bold text */
+}
+
+/* Responsive Table */
+@media (max-width: 1024px) {
+    #commands .commands-table,
+    #commands .commands-table thead,
+    #commands .commands-table tbody,
+    #commands .commands-table th,
+    #commands .commands-table td,
+    #commands .commands-table tr {
+        display: block;
+    }
+
+    #commands .commands-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    #commands .commands-table tr {
+        margin-bottom: 25px;
+        border: 1px solid rgba(0, 123, 255, 0.2); /* Bright blue border */
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+        padding: 20px;
+    }
+
+    #commands .commands-table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        font-size: 1.05em;
+    }
+
+    #commands .commands-table td:before {
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--primary); /* Bright cyan for data labels */
+        content: attr(data-label);
+    }
+
+    #commands .commands-table td:first-child {
+        padding-top: 15px;
+    }
+    #commands .commands-table td:last-child {
+        padding-bottom: 15px;
+    }
+}
+
+
+/* --- Demo Section (Terminal) --- */
+#demo {
+    background-color: var(--light-grey); /* Slightly darker light background */
+}
+
+.terminal {
+    background-color: var(--medium-grey); /* Light grey for terminal background */
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Lighter shadow */
+    width: 90%;
+    max-width: 1116px;
+    height: 400px;
+    margin: 50px auto;
+    overflow-y: auto;
+    padding: 20px;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1em;
+    color: var(--text-color); /* Dark text for terminal output */
+    border: 1px solid rgba(0, 123, 255, 0.2); /* Subtle blue border */
+    position: relative;
+    text-align: left;
+}
+
+.terminal-header {
+    display: flex;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Lighter border */
+}
+
+.terminal-header .circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.terminal-header .red { background-color: #ff5f56; }
+.terminal-header .yellow { background-color: #ffbd2e; }
+.terminal-header .green { background-color: #27c93f; }
+
+#terminalOutput div {
+    margin-bottom: 5px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.1em;
+    background-color: var(--secondary); /* Bright blue cursor */
+    margin-left: 5px;
+    animation: blink-caret 1s infinite steps(1);
+    vertical-align: text-bottom;
+}
+
+@keyframes blink-caret {
+    from, to { background-color: transparent; }
+    50% { background-color: var(--secondary); }
+}
+
+/* --- Get Started Section --- */
+#get-started {
+    background-color: var(--bg-color); /* Light background */
+    color: var(--text-color); /* Dark text */
+}
+
+#get-started .setup-steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9); /* White/very light background */
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    border: 1px solid rgba(0, 123, 255, 0.2); /* Bright blue border */
+    min-height: 400px;
+    justify-content: space-between;
+}
+
+#get-started .setup-step {
+    text-align: left;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#get-started .setup-step h3 {
+    font-size: 2em;
+    color: var(--primary); /* Bright cyan for headings */
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 30px;
+}
+
+#get-started .setup-step p {
+    font-size: 1.15em;
+    color: var(--text-color); /* Dark text */
+    margin-bottom: 25px;
+    max-width: 730px;
+    text-align: left;
+}
+
+#get-started .setup-step p small {
+    font-size: 0.9em;
+    color: #888; /* Slightly lighter dark text */
+}
+
+#get-started .get-started-code-block {
+    background-color: rgba(0, 0, 0, 0.05); /* Very light background for code */
+    border: 1px solid var(--secondary); /* Bright blue border */
+    border-radius: var(--border-radius-md);
+    padding: 15px 20px;
+    /* margin: 20px auto; */
+    width: fit-content;
+    text-align: left;
+    margin-left: 32px;
+    margin-right: auto;
+}
+
+#get-started .get-started-code-block pre {
+    margin: 0;
+    color: var(--secondary); /* Bright blue for code text */
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1em;
+    white-space: pre-wrap;
+}
+
+.setup-navigation {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.btn {
+    background-color: var(--secondary); /* Bright blue for buttons */
+    color: var(--bg-color); /* Light text on buttons */
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    background-color: var(--primary); /* Bright cyan on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:disabled {
+    background-color: #ccc; /* Lighter disabled color */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+#finishSetup {
+    background-color: var(--accent); /* Vibrant coral for finish button */
+}
+
+#finishSetup:hover {
+    background-color: #e65c50; /* Darker vibrant coral on hover */
+}
+
+#restartSetup {
+    background-color: #6c757d; /* Neutral grey for restart */
+}
+
+#restartSetup:hover {
+    background-color: #5a6268; /* Darker grey on hover */
+}
+
+#stepCounter {
+    font-weight: bold;
+    margin: 0 15px;
+    color: var(--text-color); /* Dark text for step counter */
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--light-grey); /* Slightly darker light background */
+    color: var(--text-color); /* Dark text */
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(0, 123, 255, 0.1); /* Subtle blue border */
+}
+
+.footer-social {
+    margin-bottom: 20px;
+}
+
+.footer-social a {
+    color: var(--text-color); /* Dark icons */
+    font-size: 24px;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--secondary); /* Bright blue on hover */
+}
+
+footer p {
+    font-size: 0.9em;
+    color: #888; /* Slightly lighter dark text */
+}
+
+/* --- General Responsive Adjustments --- */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 20px;
+    }
+
+    nav a {
+        margin: 5px 10px;
+        padding: 8px 12px;
+    }
+
+    nav img {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #hero h2 {
+        font-size: 3em;
+    }
+
+    #hero p {
+        font-size: 1.2em;
+    }
+
+    #typewriter {
+        font-size: 1em;
+        min-width: unset;
+        width: 90%;
+        padding: 10px 15px;
+    }
+
+    section {
+        padding: 60px 5%;
+    }
+
+    .section-title {
+        font-size: 2.2em;
+        margin-bottom: 40px;
+    }
+
+    #how .steps-container {
+        grid-template-columns: 1fr;
+    }
+
+    .terminal {
+        height: 350px;
+        width: 95%;
+        font-size: 0.9em;
+    }
+
+    #get-started .setup-steps-container {
+        padding: 30px 20px;
+    }
+
+    #get-started .setup-step h3 {
+        font-size: 1.6em;
+    }
+
+    #get-started .setup-step p {
+        font-size: 1em;
+    }
+
+    #get-started .get-started-code-block {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        margin: 0 5px;
+    }
+
+    .setup-navigation {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    nav a {
+        margin: 5px 0;
+    }
+    nav .fab {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    #hero h2 {
+        font-size: 2.5em;
+    }
+
+    #hero p {
+        font-size: 1em;
+    }
+
+    #typewriter {
+        font-size: 0.9em;
+        padding: 8px 10px;
+    }
+
+    .section-title {
+        font-size: 1.8em;
+    }
+
+    .commands-table td pre {
+        font-size: 0.8em;
+    }
+
+    .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
