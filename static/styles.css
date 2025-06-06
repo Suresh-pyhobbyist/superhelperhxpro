@@ -584,7 +584,7 @@ hr {
 .terminal-header {
     display: flex;
     align-items: center;
-    background-color: #444;
+    background-color: black;
     padding: 10px 20px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -1094,7 +1094,7 @@ hr {
 
         /* Terminal Demo Styling */
         .terminal-container {
-            background-color: var(--terminal-bg);
+            background-color: black;
             border-radius: 12px;
             padding: 25px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
