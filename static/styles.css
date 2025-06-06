@@ -583,6 +583,7 @@ hr {
 
 .terminal-header {
     display: flex;
+    background: black;
     align-items: center;
     background-color: black;
     padding: 10px 20px;
