@@ -692,7 +692,7 @@
             { type: 'output', text: 'Comprehensive overview of your teaching materials.', className: 'info' },
             { type: 'delay', time: 2500 },
             
-            // --- 10. Architect/Engineer ---
+            // --- 5. Architect/Engineer ---
             { type: 'heading', text: 'For Architects/Engineers: Managing Blueprints & CAD Files', delay: 1000 },
             { type: 'command', text: 'superhxpro batch-rename ./project_X_CAD "(^.*)_v(\\d+)\\.dwg" "\\1_CAD_Rev_\\2.dwg" true' },
             { type: 'output', text: 'Renaming CAD files for Project X...', className: 'info' },
@@ -700,6 +700,68 @@
             { type: 'output', text: '  - Renamed section_A_v2.dwg to section_A_CAD_Rev_2.dwg.', className: 'success' },
             { type: 'output', text: 'Blueprint versions are now clear and consistent!', className: 'info' },
             { type: 'delay', time: 2500 },
+
+          // --- 6. Data Analyst ---
+          { type: 'heading', text: 'For Data Analysts: Managing Large Data Sets', delay: 1000 },
+          { type: 'command', text: 'superhxpro export-map ./data_sets ./data_catalog.json' },
+          { type: 'output', text: 'Generating comprehensive data catalog...', className: 'info' },
+          { type: 'output', text: 'Exported data structure to ./data_catalog.json.', className: 'success' },
+          { type: 'output', text: 'Easily review your datasets and metadata.', className: 'info' },
+          { type: 'delay', time: 2000 },
+        
+          // --- 7. Content Manager ---
+          { type: 'heading', text: 'For Content Managers: Tagging and Organizing Media Files', delay: 1000 },
+          { type: 'command', text: 'superhxpro tag-file ./media/* --add "published,video" --recursive' },
+          { type: 'output', text: 'Adding tags to media files...', className: 'info' },
+          { type: 'output', text: '  - Tagged vacation.mp4 with "published,video".', className: 'success' },
+          { type: 'output', text: '  - Tagged interview.mp4 with "published,video".', className: 'success' },
+          { type: 'output', text: 'All media files categorized!', className: 'info' },
+          { type: 'delay', time: 2000 },
+        
+          // --- 8. Software Developer ---
+          { type: 'heading', text: 'For Developers: Versioning and Code Management', delay: 1000 },
+          { type: 'command', text: 'superhxpro batch-rename ./src "(.*)_v(\\d+)\\.js" "$1_Rev_\\2.js" true' },
+          { type: 'output', text: 'Standardizing code version filenames...', className: 'info' },
+          { type: 'output', text: '  - Renamed login_v2.js to login_Rev_2.js.', className: 'success' },
+          { type: 'output', text: '  - Renamed dashboard_v5.js to dashboard_Rev_5.js.', className: 'success' },
+          { type: 'output', text: 'Code files now clearly versioned!', className: 'info' },
+          { type: 'delay', time: 2000 },
+        
+          // --- 9. Event Organizer ---
+          { type: 'heading', text: 'For Event Planners: Managing Event Files', delay: 1000 },
+          { type: 'command', text: 'superhxpro batch-rename ./events "(.*)_draft\\.pdf" "$1_final.pdf" true' },
+          { type: 'output', text: 'Finalizing event documents...', className: 'info' },
+          { type: 'output', text: '  - Renamed wedding_draft.pdf to wedding_final.pdf.', className: 'success' },
+          { type: 'output', text: '  - Renamed conference_draft.pdf to conference_final.pdf.', className: 'success' },
+          { type: 'output', text: 'All event files ready for distribution!', className: 'info' },
+          { type: 'delay', time: 2000 },
+        
+          // --- 10. Legal Professional ---
+          { type: 'heading', text: 'For Legal Professionals: Organizing Case Files', delay: 1000 },
+          { type: 'command', text: 'superhxpro batch-rename ./cases "(.*)_(\\d{4})\\.pdf" "$1_Case_\\2.pdf" true' },
+          { type: 'output', text: 'Standardizing case file names...', className: 'info' },
+          { type: 'output', text: '  - Renamed Smith_v2023.pdf to Smith_Case_2023.pdf.', className: 'success' },
+          { type: 'output', text: '  - Renamed Johnson_v2022.pdf to Johnson_Case_2022.pdf.', className: 'success' },
+          { type: 'output', text: 'Case files organized for easy retrieval!', className: 'info' },
+          { type: 'delay', time: 2000 },
+        
+          // --- 11. Marketing Specialist ---
+          { type: 'heading', text: 'For Marketers: Tagging Campaign Assets', delay: 1000 },
+          { type: 'command', text: 'superhxpro tag-file ./campaigns/* --add "Q2,ad" --recursive' },
+          { type: 'output', text: 'Applying campaign tags...', className: 'info' },
+          { type: 'output', text: '  - Tagged banner_Q2_01.png with "Q2,ad".', className: 'success' },
+          { type: 'output', text: '  - Tagged video_launch.mp4 with "Q2,ad".', className: 'success' },
+          { type: 'output', text: 'Campaign assets tagged and ready!', className: 'info' },
+          { type: 'delay', time: 2000 },
+        
+          // --- 12. Real Estate Agent ---
+          { type: 'heading', text: 'For Real Estate Agents: Managing Property Photos', delay: 1000 },
+          { type: 'command', text: 'superhxpro auto-cleanup ./property_photos --ext .tmp --olderThan 60d' },
+          { type: 'output', text: 'Cleaning up outdated photos...', className: 'info' },
+          { type: 'output', text: '  - Removed 50 temporary image files.', className: 'success' },
+          { type: 'output', text: 'Property gallery optimized!', className: 'info' },
+          { type: 'delay', time: 2000 },
+
 
         ];
 
