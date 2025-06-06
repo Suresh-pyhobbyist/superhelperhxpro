@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuperHelperXPro - Your Digital Organizer</title>
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
@@ -59,6 +58,24 @@
                         <div class="typewriter-prompt">$</div>
                         <div class="typewriter-text" id="typewriter"></div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+         <section class="section">
+            <div class="container">
+                
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="buttons">
+                            <span class="button"></span>
+                            <span class="button yellow"></span>
+                            <span class="button green"></span>
+                        </div>
+                        <div class="title">superhelperxpro@cli:~$</div>
+                    </div>
+                    <div class="terminal-output" id="terminalOutput">
+                        </div>
                 </div>
             </div>
         </section>
@@ -704,6 +721,368 @@
             runTerminalDemo(); // Start terminal demo
             showSetupStep(currentSetupStep); // Show first setup step
         });
+
+ const terminalOutput = document.getElementById('terminalOutput');
+        const commands = [
+            // --- 1. Developer ---
+            { type: 'heading', text: 'For Developers: Cleaning Up Your Workspace', delay: 1000 },
+            { type: 'command', text: 'superhxpro auto-cleanup ./my_dev_project --ext .log,.tmp,.bak --olderThan 30d' },
+            { type: 'output', text: 'Scanning ./my_dev_project for old files...', className: 'info' },
+            { type: 'output', text: '  - Removed 18 log files (total 2.3MB).', className: 'success' },
+            { type: 'output', text: '  - Removed 7 temporary files (total 500KB).', className: 'success' },
+            { type: 'output', text: '  - Removed 3 backup files (total 1.1MB).', className: 'success' },
+            { type: 'output', text: 'Cleanup complete! Disk space reclaimed.', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 2. Student ---
+            { type: 'heading', text: 'For Students: Organizing Course Materials', delay: 1000 },
+            { type: 'command', text: 'superhxpro conditional-move-copy ./downloads ./courses/CS101 --type pdf,pptx --match "CS101_.*" --move' },
+            { type: 'output', text: 'Processing files in ./downloads for CS101...', className: 'info' },
+            { type: 'output', text: '  - Moved CS101_Lecture05.pdf to ./courses/CS101.', className: 'success' },
+            { type: 'output', text: '  - Moved CS101_Assignment2.pdf to ./courses/CS101.', className: 'success' },
+            { type: 'output', text: '  - Moved CS101_Week4_Slides.pptx to ./courses/CS101.', className: 'success' },
+            { type: 'output', text: 'Course materials neatly organized!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 3. YouTuber & Creator ---
+            { type: 'heading', text: 'For YouTubers: Managing Video Assets', delay: 1000 },
+            { type: 'command', text: 'superhxpro deduplicate ./video_raw_footage --dry-run' },
+            { type: 'output', text: 'Scanning ./video_raw_footage for duplicates (Dry Run)...', className: 'info' },
+            { type: 'output', text: '  - Found duplicate: ep15_camA_take1.mov (matches ep15_backup.mov)', className: 'info' },
+            { type: 'output', text: '  - Found duplicate: intro_anim_v2.mp4 (matches intro_anim_final.mp4)', className: 'info' },
+            { type: 'output', text: 'Dry run complete. Use without --dry-run to delete.', className: 'info' },
+            { type: 'delay', time: 1000 },
+            { type: 'command', text: 'superhxpro tag-file ./video_assets/vlog_june.mp4 --add "vlog,travel,2025_june" --recursive' },
+            { type: 'output', text: 'Tagging files in ./video_assets/vlog_june.mp4...', className: 'info' },
+            { type: 'output', text: '  - Tagged vlog_june.mp4 with "vlog,travel,2025_june".', className: 'success' },
+            { type: 'output', text: '  - Tagged raw_clip_paris.mov with "vlog,travel,2025_june".', className: 'success' },
+            { type: 'output', text: 'Assets categorized by project!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 4. Teacher & Educator ---
+            { type: 'heading', text: 'For Teachers: Streamlining Class Resources', delay: 1000 },
+            { type: 'command', text: 'superhxpro batch-rename ./student_assignments "(^.*)(\\d{4}-\\d{2}-\\d{2})_final.docx" "\\1_graded_\\2.docx" true' },
+            { type: 'output', text: 'Renaming student assignment files...', className: 'info' },
+            { type: 'output', text: '  - Renamed essay_john_2025-05-20_final.docx to essay_john_graded_2025-05-20.docx.', className: 'success' },
+            { type: 'output', text: '  - Renamed project_mary_2025-05-25_final.docx to project_mary_graded_2025-05-25.docx.', className: 'success' },
+            { type: 'output', text: 'Assignment files updated for grading!', className: 'info' },
+            { type: 'delay', time: 1000 },
+            { type: 'command', text: 'superhxpro export-map ./syllabus_archive ./syllabus_index_2025.json' },
+            { type: 'output', text: 'Generating syllabus archive index...', className: 'info' },
+            { type: 'output', text: 'Exported file map to ./syllabus_index_2025.json.', className: 'success' },
+            { type: 'output', text: 'Comprehensive overview of your teaching materials.', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 5. Graphic Designer ---
+            { type: 'heading', text: 'For Graphic Designers: Project Asset Management', delay: 1000 },
+            { type: 'command', text: 'superhxpro organize-by-type ./client_project_A/assets --groupImages --groupFonts --groupVectors' },
+            { type: 'output', text: 'Organizing ./client_project_A/assets...', className: 'info' },
+            { type: 'output', text: '  - Moved 45 images to ./client_project_A/assets/Images.', className: 'success' },
+            { type: 'output', text: '  - Moved 12 font files to ./client_project_A/assets/Fonts.', className: 'success' },
+            { type: 'output', text: '  - Moved 8 vector files to ./client_project_A/assets/Vectors.', className: 'success' },
+            { type: 'output', text: 'Project assets are now perfectly categorized!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 6. Photographer ---
+            { type: 'heading', text: 'For Photographers: Sorting Photo Shoots', delay: 1000 },
+            { type: 'command', text: 'superhxpro sort-by-date ./raw_photos --outputDir ./sorted_by_year --format "YYYY/MM-DD/HHMM"' },
+            { type: 'output', text: 'Sorting 1500+ raw photos by capture date...', className: 'info' },
+            { type: 'output', text: '  - Created 2025/06-06/1330 containing 120 files.', className: 'success' },
+            { type: 'output', text: '  - Created 2025/06-05/0945 containing 85 files.', className: 'success' },
+            { type: 'output', text: 'Photos organized chronologically for easy retrieval!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 7. Accountant/Auditor ---
+            { type: 'heading', text: 'For Accountants: Managing Financial Documents', delay: 1000 },
+            { type: 'command', text: 'superhxpro archive ./fy2024_records --zip --deleteOriginals --password "Secure2024!"' },
+            { type: 'output', text: 'Archiving FY2024 financial records...', className: 'info' },
+            { type: 'output', text: '  - Compressed ./fy2024_records to fy2024_records_archive.zip (password protected).', className: 'success' },
+            { type: 'output', text: '  - Original files deleted securely.', className: 'success' },
+            { type: 'output', text: 'Financial data now securely archived and organized!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 8. Researcher ---
+            { type: 'heading', text: 'For Researchers: Structuring Your Data', delay: 1000 },
+            { type: 'command', text: 'superhxpro classify ./experiment_data --keywords "genetics:DNA,RNA" "chemistry:compound,reaction" --move' },
+            { type: 'output', text: 'Classifying experiment data files...', className: 'info' },
+            { type: 'output', text: '  - Moved 34 files to ./experiment_data/genetics.', className: 'success' },
+            { type: 'output', text: '  - Moved 28 files to ./experiment_data/chemistry.', className: 'success' },
+            { type: 'output', text: 'Research data automatically categorized by subject!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 9. Writer/Author ---
+            { type: 'heading', text: 'For Writers: Organizing Manuscripts & Notes', delay: 1000 },
+            { type: 'command', text: 'superhxpro version-control ./novel_project --keep 5 --strategy "daily_snapshot"' },
+            { type: 'output', text: 'Creating a daily snapshot of novel_project...', className: 'info' },
+            { type: 'output', text: '  - Snapshot created: novel_project_2025-06-06_snapshot.zip.', className: 'success' },
+            { type: 'output', text: '  - Oldest snapshot removed (now keeping last 5 versions).', className: 'info' },
+            { type: 'output', text: 'Your literary masterpieces are always backed up and versioned!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 10. Architect/Engineer ---
+            { type: 'heading', text: 'For Architects/Engineers: Managing Blueprints & CAD Files', delay: 1000 },
+            { type: 'command', text: 'superhxpro batch-rename ./project_X_CAD "(^.*)_v(\\d+)\\.dwg" "\\1_CAD_Rev_\\2.dwg" true' },
+            { type: 'output', text: 'Renaming CAD files for Project X...', className: 'info' },
+            { type: 'output', text: '  - Renamed floorplan_v3.dwg to floorplan_CAD_Rev_3.dwg.', className: 'success' },
+            { type: 'output', text: '  - Renamed section_A_v2.dwg to section_A_CAD_Rev_2.dwg.', className: 'success' },
+            { type: 'output', text: 'Blueprint versions are now clear and consistent!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 11. Marketing Professional ---
+            { type: 'heading', text: 'For Marketing Pros: Campaigns & Collateral', delay: 1000 },
+            { type: 'command', text: 'superhxpro sync-folders ./campaign_assets_local ./campaign_assets_cloud --dry-run' },
+            { type: 'output', text: 'Performing dry run sync of campaign assets...', className: 'info' },
+            { type: 'output', text: '  - Would upload: new_promo_video.mp4', className: 'info' },
+            { type: 'output', text: '  - Would update: banner_ad_v3.jpg', className: 'info' },
+            { type: 'output', text: '  - Would delete: old_logo_temp.png', className: 'info' },
+            { type: 'output', text: 'Ready to synchronize all your marketing collateral!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 12. HR Professional ---
+            { type: 'heading', text: 'For HR Professionals: Employee Records & Policies', delay: 1000 },
+            { type: 'command', text: 'superhxpro sensitive-scan ./hr_documents --keywords "SSN,bank,salary" --report-only' },
+            { type: 'output', text: 'Scanning HR documents for sensitive data (report only)...', className: 'info' },
+            { type: 'output', text: '  - Found 3 documents with potential SSN data.', className: 'info' },
+            { type: 'output', text: '  - Found 1 document with bank account info.', className: 'info' },
+            { type: 'output', text: 'Ensuring data security and compliance.', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 13. Project Manager ---
+            { type: 'heading', text: 'For Project Managers: Project Documentation', delay: 1000 },
+            { type: 'command', text: 'superhxpro create-structure ./new_project_alpha --template "project_standard_template"' },
+            { type: 'output', text: 'Creating folder structure for new_project_alpha...', className: 'info' },
+            { type: 'output', text: '  - Created: ./new_project_alpha/docs', className: 'success' },
+            { type: 'output', text: '  - Created: ./new_project_alpha/deliverables', className: 'success' },
+            { type: 'output', text: '  - Created: ./new_project_alpha/meetings', className: 'success' },
+            { type: 'output', text: 'Project setup is standardized and ready!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 14. Data Analyst ---
+            { type: 'heading', text: 'For Data Analysts: Managing Datasets', delay: 1000 },
+            { type: 'command', text: 'superhxpro consolidate-csv ./data_sources --output combined_sales_data.csv --exclude "temp_.*.csv"' },
+            { type: 'output', text: 'Consolidating CSV files from ./data_sources...', className: 'info' },
+            { type: 'output', text: '  - Combined sales_q1.csv, sales_q2.csv, sales_q3.csv into combined_sales_data.csv.', className: 'success' },
+            { type: 'output', text: '  - Excluded temp_report.csv.', className: 'info' },
+            { type: 'output', text: 'Clean and ready dataset for your analysis!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 15. Real Estate Agent ---
+            { type: 'heading', text: 'For Real Estate Agents: Property Listings', delay: 1000 },
+            { type: 'command', text: 'superhxpro rename-batch ./property_photos "IMG_(\\d+)\\.jpg" "Property_123_\\1.jpg" false' },
+            { type: 'output', text: 'Renaming property photos...', className: 'info' },
+            { type: 'output', text: '  - Renamed IMG_001.jpg to Property_123_001.jpg.', className: 'success' },
+            { type: 'output', text: '  - Renamed IMG_002.jpg to Property_123_002.jpg.', className: 'success' },
+            { type: 'output', text: 'Professional image naming for your listings!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 16. Musician/Composer ---
+            { type: 'heading', text: 'For Musicians: Organizing Project Files', delay: 1000 },
+            { type: 'command', text: 'superhxpro clean-project ./my_album_mix --empty-folders --junk-files' },
+            { type: 'output', text: 'Cleaning up ./my_album_mix...', className: 'info' },
+            { type: 'output', text: '  - Removed 3 empty subfolders.', className: 'success' },
+            { type: 'output', text: '  - Deleted 5 temporary audio renders.', className: 'success' },
+            { type: 'output', text: 'Your music projects are lean and mean!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 17. Legal Professional ---
+            { type: 'heading', text: 'For Legal Professionals: Case Files & Evidence', delay: 1000 },
+            { type: 'command', text: 'superhxpro categorize-docs ./case_A_evidence --keywords "contract,affidavit,deposition" --output-subfolders' },
+            { type: 'output', text: 'Categorizing evidence for Case A...', className: 'info' },
+            { type: 'output', text: '  - Moved 10 documents to ./case_A_evidence/contract.', className: 'success' },
+            { type: 'output', text: '  - Moved 5 documents to ./case_A_evidence/affidavit.', className: 'success' },
+            { type: 'output', text: 'Critical documents are sorted for rapid access!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 18. Medical Professional ---
+            { type: 'heading', text: 'For Medical Pros: Patient Records & Research', delay: 1000 },
+            { type: 'command', text: 'superhxpro encrypt-files ./patient_scans --ext .dcm --password "HIPAA_Secure_2025"' },
+            { type: 'output', text: 'Encrypting DICOM patient scans...', className: 'info' },
+            { type: 'output', text: '  - Encrypted scan_patient_001.dcm.', className: 'success' },
+            { type: 'output', text: '  - Encrypted xray_patient_002.dcm.', className: 'success' },
+            { type: 'output', text: 'Ensuring patient data privacy and compliance.', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 19. HR Recruiter ---
+            { type: 'heading', text: 'For HR Recruiters: Candidate Resumes', delay: 1000 },
+            { type: 'command', text: 'superhxpro sort-resumes ./new_applicants --skills "Python,React,SQL" --outputDir ./filtered_candidates' },
+            { type: 'output', text: 'Sorting resumes by requested skills...', className: 'info' },
+            { type: 'output', text: '  - Moved 15 resumes to ./filtered_candidates.', className: 'success' },
+            { type: 'output', text: '  - 30 resumes did not match skill criteria.', className: 'info' },
+            { type: 'output', text: 'Find your perfect candidate faster!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 20. Event Planner ---
+            { type: 'heading', text: 'For Event Planners: Event Documents & Media', delay: 1000 },
+            { type: 'command', text: 'superhxpro consolidate-event-media ./Event_Spring_Gala --targetFolder ./archive/Spring_Gala_2025' },
+            { type: 'output', text: 'Consolidating media for Spring Gala...', className: 'info' },
+            { type: 'output', text: '  - Moved 120 photos, 8 videos from various subfolders.', className: 'success' },
+            { type: 'output', text: '  - Consolidated to ./archive/Spring_Gala_2025.', className: 'success' },
+            { type: 'output', text: 'All event memories neatly archived!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 21. Sales Professional ---
+            { type: 'heading', text: 'For Sales Professionals: Client & Lead Information', delay: 1000 },
+            { type: 'command', text: 'superhxpro categorize-leads ./leads_raw --regex "CRM_Lead_(\\d{6}).csv" --outputPattern "leads/lead_\\1.csv"' },
+            { type: 'output', text: 'Categorizing raw lead data...', className: 'info' },
+            { type: 'output', text: '  - Renamed and moved CRM_Lead_100021.csv to leads/lead_100021.csv.', className: 'success' },
+            { type: 'output', text: '  - Renamed and moved CRM_Lead_100022.csv to leads/lead_100022.csv.', className: 'success' },
+            { type: 'output', text: 'Leads are structured for your sales pipeline!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 22. IT Administrator ---
+            { type: 'heading', text: 'For IT Administrators: Server Logs & Configurations', delay: 1000 },
+            { type: 'command', text: 'superhxpro compress-old-logs ./server_logs --olderThan 7d --format "gzip"' },
+            { type: 'output', text: 'Compressing old server logs...', className: 'info' },
+            { type: 'output', text: '  - Compressed access.log.2025-05-29 to access.log.2025-05-29.gz.', className: 'success' },
+            { type: 'output', text: '  - Compressed error.log.2025-05-28 to error.log.2025-05-28.gz.', className: 'success' },
+            { type: 'output', text: 'Saving valuable disk space while keeping logs accessible!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 23. Customer Support Specialist ---
+            { type: 'heading', text: 'For Customer Support: Case Documents', delay: 1000 },
+            { type: 'command', text: 'superhxpro sort-tickets ./support_tickets --by-status "resolved,open" --move' },
+            { type: 'output', text: 'Sorting support ticket documents by status...', className: 'info' },
+            { type: 'output', text: '  - Moved 45 files to ./support_tickets/resolved.', className: 'success' },
+            { type: 'output', text: '  - Moved 12 files to ./support_tickets/open.', className: 'success' },
+            { type: 'output', text: 'Find what you need quickly to help your customers!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 24. Personal Assistant ---
+            { type: 'heading', text: 'For Personal Assistants: Managing Documents & Receipts', delay: 1000 },
+            { type: 'command', text: 'superhxpro auto-file-receipts ./scanned_receipts --vendorKeywords "Starbucks:coffee,Amazon:shopping" --dateGroup YYYY-MM' },
+            { type: 'output', text: 'Automating receipt filing...', className: 'info' },
+            { type: 'output', text: '  - Filed Starbucks_06_05_2025.pdf to ./receipts/2025-06/coffee.', className: 'success' },
+            { type: 'output', text: '  - Filed Amazon_order_12345.pdf to ./receipts/2025-06/shopping.', className: 'success' },
+            { type: 'output', text: 'Effortless expense tracking and organization!', className: 'info' },
+            { type: 'delay', time: 2500 },
+
+            // --- 25. Small Business Owner ---
+            { type: 'heading', text: 'For Small Business Owners: General Business Files', delay: 1000 },
+            { type: 'command', text: 'superhxpro consolidate-business-docs ./current_year_docs --targetFolder ./archive/business_2025 --include "invoices,reports"' },
+            { type: 'output', text: 'Consolidating business documents for archiving...', className: 'info' },
+            { type: 'output', text: '  - Moved 50 invoice PDFs and 10 quarterly reports.', className: 'success' },
+            { type: 'output', text: '  - Consolidated to ./archive/business_2025.', className: 'success' },
+            { type: 'output', text: 'Your business records are in perfect order!', className: 'info' },
+            { type: 'delay', time: 3000 }, // Longer delay before restart
+        ];
+
+        let commandIndex = 0;
+        let charIndex = 0;
+        let currentLine = null;
+        let cursor = null;
+        let personaHeading = null;
+
+        function typeWriter() {
+            if (commandIndex < commands.length) {
+                const item = commands[commandIndex];
+
+                if (item.type === 'delay') {
+                    if (personaHeading) {
+                        personaHeading.remove();
+                        personaHeading = null;
+                    }
+                    setTimeout(() => {
+                        commandIndex++;
+                        typeWriter();
+                    }, item.time);
+                    return;
+                }
+
+                if (item.type === 'heading') {
+                    if (personaHeading) {
+                        personaHeading.remove(); // Remove previous heading if exists
+                    }
+                    personaHeading = document.createElement('h3');
+                    personaHeading.classList.add('persona-heading');
+                    personaHeading.textContent = item.text;
+                    // Insert before the terminal container
+                    terminalOutput.parentNode.parentNode.insertBefore(personaHeading, terminalOutput.parentNode);
+
+                    personaHeading.style.animationDelay = (item.delay || 0) + 'ms';
+                    personaHeading.style.opacity = '1'; // Make it visible for animation
+
+                    terminalOutput.innerHTML = ''; // Clear terminal for new persona
+                    commandIndex++;
+                    setTimeout(typeWriter, (item.delay || 0) + 100); // Small delay to allow heading animation to start
+                    return;
+                }
+
+
+                if (!currentLine) {
+                    currentLine = document.createElement('span');
+                    currentLine.classList.add('output-line');
+                    currentLine.style.animationDelay = '0s'; // Each line appears immediately after previous
+                    terminalOutput.appendChild(currentLine);
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight; // Scroll to bottom
+
+                    if (item.type === 'command') {
+                        const promptSpan = document.createElement('span');
+                        promptSpan.classList.add('prompt');
+                        promptSpan.textContent = '$ ';
+                        currentLine.appendChild(promptSpan);
+
+                        const commandSpan = document.createElement('span');
+                        commandSpan.classList.add('command');
+                        currentLine.appendChild(commandSpan);
+                        charIndex = 0;
+                        typeCommand(commandSpan, item.text);
+                        return;
+                    } else if (item.type === 'output') {
+                        currentLine.textContent = item.text;
+                        if (item.className) {
+                            currentLine.classList.add(item.className);
+                        }
+                        currentLine.classList.add('current');
+                        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                        commandIndex++;
+                        setTimeout(typeWriter, 500);
+                        currentLine = null;
+                        return;
+                    }
+                }
+            } else {
+                // Loop commands after all are shown
+                setTimeout(() => {
+                    if (personaHeading) {
+                        personaHeading.remove();
+                        personaHeading = null;
+                    }
+                    terminalOutput.innerHTML = '';
+                    commandIndex = 0;
+                    charIndex = 0;
+                    currentLine = null;
+                    typeWriter();
+                }, 3000);
+            }
+        }
+
+        function typeCommand(element, text) {
+            if (charIndex < text.length) {
+                element.textContent += text.charAt(charIndex);
+                charIndex++;
+
+                if (!cursor) {
+                    cursor = document.createElement('span');
+                    cursor.classList.add('cursor');
+                    element.parentNode.appendChild(cursor);
+                }
+                element.parentNode.appendChild(cursor); // Keep cursor at end
+
+                setTimeout(() => typeCommand(element, text), 35); // Typing speed
+            } else {
+                if (cursor) {
+                    cursor.remove();
+                    cursor = null;
+                }
+                currentLine.classList.add('current');
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                commandIndex++;
+                currentLine = null;
+                setTimeout(typeWriter, 1200); // Delay after command is typed
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', typeWriter);
     </script>
 
 </body>
