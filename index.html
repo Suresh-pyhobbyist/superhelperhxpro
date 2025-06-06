@@ -1,504 +1,710 @@
-<html lang="en"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SuperHelperXPro - Your Digital Organizer</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperHelperXPro - Your Digital Organizer</title>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;display=swap" rel="stylesheet">
-<link href="/static/styles.css" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+
+    <link href="/static/styles.css" rel="stylesheet">
+    </head>
 <body>
 
-<nav>
- <img src="/assets/images/logo.svg" alt="Logo" style="width:70px; margin-right:auto;">
+    <header class="main-header" aria-labelledby="site-title">
+    <nav class="navbar container" aria-label="Main Navigation">
+        <a href="#hero" class="navbar-brand" id="site-title">
+            <img src="/assets/images/logo.svg" alt="SuperHelperXPro Logo" class="logo">
+            <span class="brand-text">SuperHelperXPro</span>
+        </a>
 
-<a href="#hero">Home</a>
- <a href="#how">How It Works</a>
- <a href="#commands">Commands</a>
- <a href="#demo">Demo</a>
- <a href="#get-started">Get Started</a>
- <a href="https://github.com/Suresh-pyhobbyist/superhelperhxpro" target="_blank" aria-label="GitHub">
-  <i class="fab fa-github"></i>
- </a>
-</nav>
-
-<section id="hero">
-  <div class="hero-content">
-    <h2 style="font-size: 2.8rem;">SuperHelperXPro</h2>
-    <p>Your smart digital organizer.</p>
-    <div class="typewriter" id="typewriter"></div>
-    <div style="margin-top:20px;padding: 17px;width: auto;background:#f0f0f0;display: table;border-radius: 10px;">
-      <pre style="margin:0;font-family:'Fira Code', monospace;">npm install superhelperhxpro</pre>
-    </div>
-    <div style="margin-top:20px;">
-      <p>Clear clutter effortlessly.</p>
-      <p>Sort, search, and manage your files with precision.</p>
-      <p>Your personal assistant for a tidy computer.</p>
-    </div>
-  </div>
-</section>
-
-<section id="how"><div class="container"><h2 class="section-title">How It Works</h2><div class="steps-container"><div class="step">
-    <i class="fas fa-folder-open"></i>
-    <h3>Visualize</h3>
-    <p>Gain insights into your file system with interactive visualizations.</p>
-   </div><div class="step">
-    <i class="fas fa-edit"></i>
-    <h3>Batch Rename</h3>
-    <p>Apply complex renaming patterns to many files at once using regex.</p>
-   </div><div class="step">
-    <i class="fas fa-copy"></i>
-    <h3>Deep Clone</h3>
-    <p>Duplicate entire folder structures, including all subdirectories and files.</p>
-   </div><div class="step">
-    <i class="fas fa-random"></i>
-    <h3>Conditional Move</h3>
-    <p>Automatically sort and move files based on criteria like age, size, or type.</p>
-   </div><div class="step">
-    <i class="fas fa-broom"></i>
-    <h3>Auto Cleanup</h3>
-    <p>Set rules to automatically remove old, temporary, or unwanted files.</p>
-   </div><div class="step">
-    <i class="fas fa-search"></i>
-    <h3>Search &amp; Tag</h3>
-    <p>Efficiently locate and categorize files with powerful search and tagging tools.</p>
-   </div></div></div>
-</section>
-
-<section id="demo"><div style="display:flex; justify-content:center; width: 100%;"><div class="terminal" id="terminal">
-   <div class="terminal-header">
-    <div class="circle red"></div>
-    <div class="circle yellow"></div>
-    <div class="circle green"></div>
-   </div>
-   <div id="terminalOutput"></div></div>
-  </div><p style="display: none;" id="contact"></p></div>
-</section>
-
-<section id="commands">
-  <div class="container">
-    <h2 class="section-title">🔮 Unleash the Magic: Commands at Your Fingertips! 🦸‍♂️🦸‍♀️</h2>
-    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: #555;">Discover the incredible capabilities SuperHelperXPro brings to your daily file management:</p>
-
-    <table class="commands-table">
-      <thead>
-        <tr>
-          <th>Command &amp; Syntax</th>
-          <th>What It Does</th>
-          <th>Example &amp; Meaning</th>
-          <th>Why It’s Great!</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Command"><pre>visualize &lt;folder&gt; [maxDepth]</pre></td>
-          <td data-label="What It Does"><b>Visualize your folder tree</b> with a clear, visual map. 🌳</td>
-          <td data-label="Example"><pre>superhxpro visualize "Photos" 2</pre>Shows your "Photos" folder and its subfolders up to 2 levels deep.</td>
-          <td data-label="Why It's Great">Gain instant clarity on your file structure! 🗺️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>batch-rename &lt;folder&gt; &lt;regex&gt; &lt;replacement&gt; [recursive]</pre></td>
-          <td data-label="What It Does"><b>Rename multiple files</b> in one go using powerful regular expressions. 🏷️</td>
-          <td data-label="Example"><pre>superhxpro batch-rename "Downloads" "(IMG_)(\\d+)" "Vacation_\\2" true</pre>Transforms `IMG_001.jpg` into `Vacation_001.jpg` across your "Downloads" folder, including subfolders.</td>
-          <td data-label="Why It's Great">Save hours of tedious manual renaming! ⏱️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>deep-clone &lt;src&gt; &lt;dest&gt;</pre></td>
-          <td data-label="What It Does"><b>Create a perfect, complete copy</b> of an entire folder and its contents. 👯</td>
-          <td data-label="Example"><pre>superhxpro deep-clone "ProjectX" "ProjectX_Backup"</pre>Creates a full duplicate of "ProjectX" as "ProjectX_Backup".</td>
-          <td data-label="Why It's Great">Effortlessly back up or duplicate projects! 💾</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>conditional-move-copy &lt;src&gt; &lt;dest&gt; &lt;type&gt; &lt;value&gt; [--copy]</pre></td>
-          <td data-label="What It Does"><b>Move or copy files based on smart rules</b> like age or size. 📐</td>
-          <td data-label="Example"><pre>superhxpro conditional-move-copy "Downloads" "Archive" ageDays 180 --copy</pre>Copies files in "Downloads" older than 180 days to "Archive". Use without `--copy` to move.</td>
-          <td data-label="Why It's Great">Keep your folders tidy and relevant automatically! 🧹</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>auto-cleanup &lt;folder&gt; &lt;criteria&gt; &lt;value&gt;</pre></td>
-          <td data-label="What It Does"><b>Automatically delete old, temporary, or unwanted files</b> to free up space. 🗑️</td>
-          <td data-label="Example"><pre>superhxpro auto-cleanup "Temp" ageDays 7</pre>Deletes files older than 7 days in your "Temp" folder.</td>
-          <td data-label="Why It's Great">Reclaim valuable disk space with ease! ♻️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>deduplicate &lt;folder&gt; [--dry-run]</pre></td>
-          <td data-label="What It Does"><b>Find and remove duplicate files</b> using smart hashing. 🕵️‍♀️</td>
-          <td data-label="Example"><pre>superhxpro deduplicate "MyPhotos" --dry-run</pre>Shows you duplicates without deleting them first. Omit `--dry-run` to delete.</td>
-          <td data-label="Why It's Great">Free up massive amounts of storage by eliminating redundant files! 🌬️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>tag-file &lt;filePath&gt; [--add &lt;tags&gt;] [--remove &lt;tags&gt;] [--recursive]</pre></td>
-          <td data-label="What It Does"><b>Add or remove custom tags</b> on your files for better organization. 🏷️</td>
-          <td data-label="Example"><pre>superhxpro tag-file "Report.pdf" --add "urgent,work"</pre>Tags `Report.pdf` as "urgent" and "work".</td>
-          <td data-label="Why It's Great">Organize your files by custom categories and contexts! 🗂️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>search-tag &lt;folder&gt; &lt;tag&gt;</pre></td>
-          <td data-label="What It Does"><b>Quickly find all files</b> with a specific tag. 🔍</td>
-          <td data-label="Example"><pre>superhxpro search-tag "Projects" "urgent"</pre>Lists all files tagged "urgent" within your "Projects" folder.</td>
-          <td data-label="Why It's Great">Pinpoint important files in seconds! ⚡</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>search-meta &lt;folder&gt; &lt;jsonQuery&gt;</pre></td>
-          <td data-label="What It Does"><b>Perform powerful searches</b> based on file size, date, type, or custom tags and moods! 🧠</td>
-          <td data-label="Example"><pre>superhxpro search-meta "." "{\"type\":\"image\",\"size\":{\"gt\":5000000}}"</pre>Finds all images larger than 5MB in the current directory.</td>
-          <td data-label="Why It's Great">Unlock advanced search capabilities! 🔎</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>exec-script &lt;script.js/py&gt; [args...]</pre></td>
-          <td data-label="What It Does"><b>Run your own custom JavaScript or Python scripts</b> directly through SuperHelperXPro. 🤖</td>
-          <td data-label="Example"><pre>superhxpro exec-script "cleanup_script.py" '{"folder":"Temp"}'</pre>Executes your Python script `cleanup_script.py` with custom arguments.</td>
-          <td data-label="Why It's Great">Extend SuperHelperXPro with your own automation logic! ⚙️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>health-check &lt;folder&gt;</pre></td>
-          <td data-label="What It Does"><b>Scan your folders for issues</b> like broken links or inaccessible files. 🩺</td>
-          <td data-label="Example"><pre>superhxpro health-check "SharedDocs"</pre>Identifies potential problems in your shared documents.</td>
-          <td data-label="Why It's Great">Keep your data healthy and reliable! ❤️‍🩹</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>export-map &lt;folder&gt; &lt;jsonFile&gt;</pre></td>
-          <td data-label="What It Does"><b>Generate a detailed JSON catalog</b> of your entire file structure and metadata. 📊</td>
-          <td data-label="Example"><pre>superhxpro export-map "ClientPhotos" "client_photos_catalog.json"</pre>Creates `client_photos_catalog.json` with all your photo details.</td>
-          <td data-label="Why It's Great">Get a comprehensive overview of your digital assets! 📈</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>apply-rules &lt;folder&gt;</pre></td>
-          <td data-label="What It Does"><b>Run predefined automation rules</b> to streamline your workflows. (Conceptual) ⚙️</td>
-          <td data-label="Example"><pre>superhxpro apply-rules "Inbox"</pre>Triggers any custom rules set up for your "Inbox" folder.</td>
-          <td data-label="Why It's Great">Automate your routine file management tasks! 🎯</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>schedule-command &lt;name&gt; &lt;delay_ms&gt; &lt;command_args...&gt;</pre></td>
-          <td data-label="What It Does"><b>Set commands to run at a later time.</b> (Conceptual) ⏰</td>
-          <td data-label="Example"><pre>superhxpro schedule-command "daily_cleanup" 86400000 auto-cleanup Temp ageDays 7</pre>Schedules the "auto-cleanup" command to run after 24 hours (86,400,000 milliseconds).</td>
-          <td data-label="Why It's Great">Automate repetitive tasks without lifting a finger! 🗓️</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>undo-actions [steps]</pre></td>
-          <td data-label="What It Does"><b>Revert previous actions</b> for safety and peace of mind. (Conceptual) ↩️</td>
-          <td data-label="Example"><pre>superhxpro undo-actions 1</pre>Attempts to reverse the last action taken.</td>
-          <td data-label="Why It's Great">Work with confidence, knowing you can rewind! 🔙</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>folder-mood-set &lt;folder&gt; &lt;mood&gt; [--name &lt;name&gt;]</pre></td>
-          <td data-label="What It Does"><b>Assign emotional labels</b> to your folders. 😊</td>
-          <td data-label="Example"><pre>superhxpro folder-mood-set "VacationPhotos" happy --name "SummerTrip"</pre>Labels "VacationPhotos" as "happy" and names the mood "SummerTrip".</td>
-          <td data-label="Why It's Great">Make your folders feel special and organize by sentiment! 💖</td>
-        </tr>
-        <tr>
-          <td data-label="Command"><pre>folder-mood-get &lt;folder&gt; [--recursive] [--filter-mood &lt;filter&gt;]</pre></td>
-          <td data-label="What It Does"><b>Retrieve emotional labels</b> for folders. Use `--recursive` to scan subfolders, and `--filter-mood` to filter by mood value or name.</td>
-          <td data-label="Example"><pre>superhxpro folder-mood-get "E:\" --recursive --filter-mood joyful</pre>Lists all folders on drive E: with a mood value or name containing "joyful".</td>
-          <td data-label="Why It's Great">Quickly find folders based on their emotional tags! ✨</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="get-started">
-  <div class="container">
-    <!-- <h2 class="section-title">🚀 Get Started: It's Super Easy with Python!</h2>
-    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: #555;">No complex setups needed! SuperHelperXPro runs perfectly with Python.</p> -->
-
-    <div class="setup-steps-container">
-      <div class="setup-step" data-step="1">
-        <h3>Step 1: Install Python</h3>
-        <p class="setup-para">If you don't have it, download and install **Python 3** from <a href="https://www.python.org/downloads/" target="_blank" style="color: var(--secondary-blue); text-decoration: underline;">python.org</a>. Make sure to check the box that says "Add Python to PATH" during installation if you're on Windows!</p>
-        <div class="get-started-code-block">
-            <pre>Visit python.org/downloads</pre>
+        <div class="navbar-right-content">
+            <ul class="navbar-menu" role="menubar">
+                <li role="none"><a href="#features" role="menuitem">Features</a></li>
+                <li role="none"><a href="#commands-showcase" role="menuitem">Commands</a></li>
+                <li role="none"><a href="#live-demo" role="menuitem">Demo</a></li>
+                <li role="none"><a href="#get-started" role="menuitem">Get Started</a></li>
+                <li role="none" style="color: white">
+                    <a href="https://github.com/Suresh-pyhobbyist/superhelperhxpro" style="color: white;" target="_blank" aria-label="View SuperHelperXPro on GitHub" class="github-link" role="menuitem">
+                        <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                    </a>
+                </li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navbar-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
-      </div>
+    </nav>
+</header>
 
-      <div class="setup-step" data-step="2" style="display: none;">
-        <h3>Step 2: Install SuperHelperXPro</h3>
-        <p class="setup-para">Open your **terminal** or command prompt and install SuperHelperXPro using `pip`, Python's package installer:</p>
-        <div class="get-started-code-block">
-            <pre>pip install superhelperhxpro</pre>
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-content-left">
+                    <h1 class="hero-main-title">SuperHelperXPro<br><span class="gradient-text">Your Smart Digital Organizer</span></h1>
+                    <p class="hero-tagline">Clear clutter effortlessly. Sort, search, and manage your files with precision. Your personal assistant for a tidy computer.</p>
+                    <div class="code-install-wrapper">
+                        <pre class="code-block"><code>npm install -g superhelperhxpro</code></pre>
+                        <button class="copy-btn" aria-label="Copy command to clipboard"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <div class="hero-cta-group">
+                        <a href="#get-started" class="btn btn-primary">Get Started Now</a>
+                        <a href="#live-demo" class="btn btn-secondary">Watch Demo</a>
+                    </div>
+                </div>
+                <div class="hero-visual-right">
+                    <div class="typewriter-demo-container">
+                        <div class="typewriter-prompt">$</div>
+                        <div class="typewriter-text" id="typewriter"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Why SuperHelperXPro? <span class="highlight">Take Control of Your Files!</span> 💡</h2>
+                <p class="section-subtitle">Organizing files can feel like a never-ending battle. With SuperHelperXPro, transforming your digital clutter into an organized masterpiece is a breeze!</p>
+
+                <div class="features-grid-modern">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-folder-open"></i></div>
+                        <h3>Visualize</h3>
+                        <p>Gain insights into your file system with interactive and intuitive visual maps.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-edit"></i></div>
+                        <h3>Batch Rename</h3>
+                        <p>Apply complex renaming patterns to thousands of files at once using powerful regex.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-copy"></i></div>
+                        <h3>Deep Clone</h3>
+                        <p>Create perfect, complete copies of entire folder structures, including all subdirectories.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-random"></i></div>
+                        <h3>Conditional Move</h3>
+                        <p>Automatically sort and move files based on intelligent criteria like age, size, or type.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-broom"></i></div>
+                        <h3>Auto Cleanup</h3>
+                        <p>Set smart rules to automatically remove old, temporary, or unwanted files, freeing space.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-search"></i></div>
+                        <h3>Search & Tag</h3>
+                        <p>Efficiently locate and categorize files with powerful, flexible search and tagging tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                        <h3>Deduplicate</h3>
+                        <p>Find and eliminate duplicate files with smart hashing, reclaiming significant disk space.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Activity Graph</h3>
+                        <p>Visualize your file activity over time with an insightful ASCII calendar heatmap.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Custom Automation</h3>
+                        <p>Extend capabilities by running your own JavaScript or Python scripts directly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="commands-showcase" class="commands-showcase-section">
+            <div class="container">
+                <h2 class="section-title">🔮 Unleash the Magic: <span class="highlight">Commands at Your Fingertips!</span> 🦸‍♂️🦸‍♀️</h2>
+                <p class="section-subtitle">Discover the incredible capabilities SuperHelperXPro brings to your daily file management:</p>
+
+                <div class="commands-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro visualize &lt;folder&gt; [maxDepth]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Visualize your folder tree with a clear, visual map. 🌳</p>
+                            <p><b>Example:</b> <pre>superhxpro visualize "Photos" 2</pre> Shows your "Photos" folder and its subfolders up to 2 levels deep.</p>
+                            <p><b>Why It’s Great:</b> Gain instant clarity on your file structure! 🗺️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro batch-rename &lt;folder&gt; &lt;regex&gt; &lt;replacement&gt; [recursive]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Rename multiple files in one go using powerful regular expressions. 🏷️</p>
+                            <p><b>Example:</b> <pre>superhxpro batch-rename "Downloads" "(IMG_)(\\d+)" "Vacation_\\2" true</pre> Transforms `IMG_001.jpg` into `Vacation_001.jpg` across your "Downloads" folder, including subfolders.</p>
+                            <p><b>Why It’s Great:</b> Save hours of tedious manual renaming! ⏱️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro deep-clone &lt;src&gt; &lt;dest&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Create a perfect, complete copy of an entire folder and its contents. 👯</p>
+                            <p><b>Example:</b> <pre>superhxpro deep-clone "ProjectX" "ProjectX_Backup"</pre> Creates a full duplicate of "ProjectX" as "ProjectX_Backup".</p>
+                            <p><b>Why It’s Great:</b> Effortlessly back up or duplicate projects! 💾</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro conditional-move-copy &lt;src&gt; &lt;dest&gt; &lt;type&gt; &lt;value&gt; [--copy]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Move or copy files based on smart rules like age or size. 📐</p>
+                            <p><b>Example:</b> <pre>superhxpro conditional-move-copy "Downloads" "Archive" ageDays 180</pre> Moves files in "Downloads" older than 180 days to your "Archive" folder. Add `--copy` to copy instead of move.</p>
+                            <p><b>Why It’s Great:</b> Keep your folders tidy and relevant automatically! 🧹</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro auto-cleanup &lt;folder&gt; &lt;criteria&gt; [value]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Automatically delete old, temporary, or unwanted files to free up space. 🗑️</p>
+                            <p><b>Example:</b> <pre>superhxpro auto-cleanup "Temp" ageDays 7</pre> Deletes files older than 7 days in your "Temp" folder.</p>
+                            <p><b>Why It’s Great:</b> Reclaim valuable disk space with ease! ♻️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro deduplicate &lt;folder&gt; [--dry-run]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Find and remove duplicate files using smart hashing. 🕵️‍♀️</p>
+                            <p><b>Example:</b> <pre>superhxpro deduplicate "MyPhotos" --dry-run</pre> Shows you duplicates without deleting them first.</p>
+                            <p><b>Why It’s Great:</b> Free up massive amounts of storage by eliminating redundant files! 🌬️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro tag-file &lt;filePath&gt; [--add &lt;tags&gt;] [--remove &lt;tags&gt;] [--recursive]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Add or remove custom tags on your files for better organization. 🏷️</p>
+                            <p><b>Example:</b> <pre>superhxpro tag-file "Report.pdf" --add "urgent,work"</pre> Tags `Report.pdf` as "urgent" and "work".</p>
+                            <p><b>Why It’s Great:</b> Organize your files by custom categories and contexts! 🗂️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro search-tag &lt;folder&gt; &lt;tag&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Quickly find all files with a specific tag. 🔍</p>
+                            <p><b>Example:</b> <pre>superhxpro search-tag "Projects" "urgent"</pre> Lists all files tagged "urgent" within your "Projects" folder.</p>
+                            <p><b>Why It’s Great:</b> Pinpoint important files in seconds! ⚡</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro search-meta &lt;folder&gt; &lt;jsonQuery&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Perform powerful searches based on file size, date, type, custom tags, or mood. 🧠</p>
+                            <p><b>Example:</b> <pre>superhxpro search-meta "." "{\"type\":[\"jpg\",\"png\"],\"size\":{\"gt\":5000000},\"last_modified\":{\"after\":\"2024-01-01\"}}"</pre> Finds JPG/PNG images larger than 5MB, modified after Jan 1, 2024, in the current directory.</p>
+                            <p><b>Why It’s Great:</b> Unlock advanced, precise file discovery! 🔎</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro file-activity-graph &lt;folder&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Visualize daily file activity over the last year as an ASCII calendar heatmap. 📈</p>
+                            <p><b>Example:</b> <pre>superhxpro file-activity-graph "Documents"</pre> Shows a visual graph of when files were modified in your "Documents" folder.</p>
+                            <p><b>Why It’s Great:</b> See your productivity trends at a glance! 📅</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro exec-script &lt;script.js/py&gt; [args...]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Run your own custom JavaScript or Python scripts directly through SuperHelperXPro. 🤖</p>
+                            <p><b>Example:</b> <pre>superhxpro exec-script "cleanup_script.py" '{"folder":"Temp"}'</pre> Executes your Python script `cleanup_script.py` with custom arguments.</p>
+                            <p><b>Why It’s Great:</b> Extend SuperHelperXPro with your own automation logic! ⚙️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro health-check &lt;folder&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Scan your folders for issues like broken links or inaccessible files. 🩺</p>
+                            <p><b>Example:</b> <pre>superhxpro health-check "SharedDocs"</pre> Identifies potential problems in your shared documents.</p>
+                            <p><b>Why It’s Great:</b> Keep your data healthy and reliable! ❤️‍🩹</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro export-map &lt;folder&gt; &lt;jsonFile&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Generate a detailed JSON catalog of your entire file structure and metadata. 📊</p>
+                            <p><b>Example:</b> <pre>superhxpro export-map "ClientPhotos" "client_photos_catalog.json"</pre> Creates `client_photos_catalog.json` with all your photo details.</p>
+                            <p><b>Why It’s Great:</b> Get a comprehensive overview of your digital assets! 📈</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro apply-rules &lt;folder&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Run predefined automation rules to streamline your workflows. (Conceptual) ⚙️</p>
+                            <p><b>Example:</b> <pre>superhxpro apply-rules "Inbox"</pre> Triggers any custom rules set up for your "Inbox" folder.</p>
+                            <p><b>Why It’s Great:</b> Automate your routine file management tasks! 🎯</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro schedule-command &lt;name&gt; &lt;delay_ms&gt; &lt;command_args...&gt;</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Set commands to run at a later time. (Conceptual) ⏰</p>
+                            <p><b>Example:</b> <pre>superhxpro schedule-command "daily_cleanup" 86400000 auto-cleanup Temp ageDays 7</pre> Schedules the "auto-cleanup" command to run after 24 hours (86,400,000 milliseconds).</p>
+                            <p><b>Why It’s Great:</b> Automate repetitive tasks without lifting a finger! 🗓️</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro undo-actions [steps]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Revert previous actions for safety and peace of mind. (Conceptual) ↩️</p>
+                            <p><b>Example:</b> <pre>superhxpro undo-actions 1</pre> Attempts to reverse the last action taken.</p>
+                            <p><b>Why It’s Great:</b> Work with confidence, knowing you can rewind! 🔙</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro folder-mood-set &lt;folder&gt; &lt;mood&gt; [--name &lt;name&gt;]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Assign emotional labels to your folders. 😊</p>
+                            <p><b>Example:</b> <pre>superhxpro folder-mood-set "VacationPhotos" happy --name "SummerTrip"</pre> Labels "VacationPhotos" as "happy" and names the mood "SummerTrip".</p>
+                            <p><b>Why It’s Great:</b> Make your folders feel special and organize by sentiment! 💖</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3><pre>superhxpro folder-mood-get &lt;folder&gt; [--recursive] [--filter-mood &lt;filter&gt;]</pre></h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p><b>What It Does:</b> Retrieve emotional labels for folders. Use `--recursive` to scan subfolders, and `--filter-mood` to filter by mood value or name.</p>
+                            <p><b>Example:</b> <pre>superhxpro folder-mood-get "E:\" --recursive --filter-mood joyful</pre> Lists all folders on drive E: with a mood value or name containing "joyful".</p>
+                            <p><b>Why It’s Great:</b> Quickly find folders based on their emotional tags! ✨</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="live-demo" class="demo-section">
+            <div class="container">
+                <h2 class="section-title">See SuperHelperXPro <span class="highlight">in Action!</span></h2>
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn close"></span>
+                            <span class="terminal-btn minimize"></span>
+                            <span class="terminal-btn maximize"></span>
+                        </div>
+                        <div class="terminal-title">Terminal</div>
+                    </div>
+                    <div class="terminal-body" id="terminalOutput">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="get-started" class="get-started-section">
+            <div class="container">
+                <h2 class="section-title">🚀 Get Started: <span class="highlight">It's Super Easy via npm!</span></h2>
+                <p class="section-subtitle">SuperHelperXPro is designed for seamless integration into your command-line workflow.</p>
+
+                <div class="setup-steps-wrapper">
+                    <div class="setup-steps-indicator">
+                        <div class="step-dot active" data-step-target="0"></div>
+                        <div class="step-dot" data-step-target="1"></div>
+                        <div class="step-dot" data-step-target="2"></div>
+                        <div class="step-dot" data-step-target="3"></div>
+                    </div>
+
+                    <div class="setup-content">
+                        <div class="setup-step active" data-step="0">
+                            <h3>Step 1: Install Python</h3>
+                            <p>If you don't have it, download and install **Python 3** from <a href="https://www.python.org/downloads/" target="_blank">python.org</a>. Make sure to check the box that says "Add Python to PATH" during installation if you're on Windows!</p>
+                            <div class="code-install-wrapper">
+                                <pre class="code-block"><code>Visit python.org/downloads</code></pre>
+                                <button class="copy-btn" aria-label="Copy instruction to clipboard"><i class="fas fa-external-link-alt"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="setup-step" data-step="1">
+                            <h3>Step 2: Install SuperHelperXPro via npm</h3>
+                            <p>Open your **terminal** or command prompt and install SuperHelperXPro globally using `npm`:</p>
+                            <div class="code-install-wrapper">
+                                <pre class="code-block"><code>npm install -g superhelperhxpro</code></pre>
+                                <button class="copy-btn" aria-label="Copy command to clipboard"><i class="fas fa-copy"></i></button>
+                            </div>
+                            <p class="small-text">This command downloads and installs the package from npm.</p>
+                        </div>
+
+                        <div class="setup-step" data-step="2">
+                            <h3>Step 3: Run Your First Command</h3>
+                            <p>Now you're ready to unleash SuperHelperXPro! Try a basic command like visualizing your current folder's structure:</p>
+                            <div class="code-install-wrapper">
+                                <pre class="code-block"><code>superhxpro visualize . 2</code></pre>
+                                <button class="copy-btn" aria-label="Copy command to clipboard"><i class="fas fa-copy"></i></button>
+                            </div>
+                            <p class="small-text">This command will show you the current folder's structure up to 2 levels deep!</p>
+                            <p class="small-text">Since SuperHelperXPro is installed globally, you can run its main executable directly.</p>
+                        </div>
+
+                        <div class="setup-step final-step" data-step="3">
+                            <h3>You're All Set!</h3>
+                            <p>That's it! You've successfully installed and run your first command with **SuperHelperXPro**. Get ready to transform your messy files into an organized masterpiece!</p>
+                            <a href="#commands-showcase" class="btn btn-primary-large">Explore More Commands</a>
+                        </div>
+                    </div>
+
+                    <div class="setup-navigation">
+                        <button id="prevStep" class="btn btn-nav" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                        <span id="stepCounter" class="step-counter">Step 1 of 4</span>
+                        <button id="nextStep" class="btn btn-nav">Next <i class="fas fa-arrow-right"></i></button>
+                        <button id="restartSetup" class="btn btn-nav hidden">Restart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="/assets/images/logo.svg" alt="SuperHelperXPro Logo" class="logo-footer">
+                    <h3>SuperHelperXPro</h3>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#commands-showcase">Commands</a></li>
+                        <li><a href="#live-demo">Demo</a></li>
+                        <li><a href="#get-started">Get Started</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <a href="https://github.com/Suresh-pyhobbyist/superhelperhxpro" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SuperHelperXPro. All rights reserved.</p>
+                <p>SuperHelperXPro is provided as-is for personal and professional use. Use responsibly and enjoy organizing your files.</p>
+            </div>
         </div>
-        <p style="margin-top: 10px;"><small>This command downloads and installs the package from PyPI (Python Package Index).</small></p>
-      </div>
+    </footer>
 
-      <div class="setup-step" data-step="3" style="display: none;">
-        <h3>Step 3: Test the Installation</h3>
-        <p class="setup-para">Let's make sure everything installed correctly. In your terminal, run this test command:</p>
-        <div class="get-started-code-block">
-            <pre>pip show superhelperhxpro</pre>
-        </div>
-        <p style="margin-top: 10px;" class="setup-para"><small>You should see information about the installed package, including its version and location.</small></p>
-      </div>
+    <script>
+        // Typing effect for hero section
+        const typewriterEl = document.getElementById('typewriter');
+        const heroPhrases = [
+            'superhxpro visualize "My Holiday Pics" 3',
+            'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true',
+            'superhxpro deep-clone "MyProject" "Backup_2024"',
+            'superhxpro auto-cleanup "Downloads" ageDays 90',
+            'superhxpro search-tag "report" "important"'
+        ];
 
-      <div class="setup-step" data-step="4" style="display: none;">
-        <h3>Step 4: Run Your First Command</h3>
-        <p class="setup-para">Now you're ready to unleash SuperHelperXPro! Try a basic command like visualizing your current folder's structure:</p>
-        <div class="get-started-code-block">
-          <pre>superhelperhxpro visualize . 2</pre>
-        </div>
-        <p style="margin-top: 10px;" class="setup-para">(This command will show you the current folder's structure up to 2 levels deep!)</p>
-        <p style="margin-top: 10px;" class="setup-para"><small>Since SuperHelperXPro is installed via `pip`, you can often run its main executable directly without `python superhxpro.py`.</small></p>
-      </div>
+        let heroIdx = 0;
+        let heroCharIdx = 0;
+        let heroDeleting = false;
 
-      <div class="setup-step" data-step="5" style="display: none;">
-        <h3>You're All Set!</h3>
-        <p class="setup-para" style="text-align: center; font-size: 1.1rem; margin-top: 20px; color: #555;">That's it! You've successfully installed and run your first command with **SuperHelperXPro**. Get ready to transform your messy files into an organized masterpiece!</p>
-        <p class="setup-para" style="text-align: center; margin-top: 20px;">
-            <a href="#demo" class="btn">Explore More Commands</a>
-        </p>
-      </div>
+        function typeHero() {
+            const current = heroPhrases[heroIdx];
+            if (!heroDeleting) {
+                // Typing
+                typewriterEl.textContent = current.substring(0, heroCharIdx + 1);
+                heroCharIdx++;
+                if (heroCharIdx === current.length) {
+                    // Pause at the end
+                    heroDeleting = true;
+                    setTimeout(typeHero, 1500);
+                } else {
+                    setTimeout(typeHero, 70);
+                }
+            } else {
+                // Deleting
+                typewriterEl.textContent = current.substring(0, heroCharIdx - 1);
+                heroCharIdx--;
+                if (heroCharIdx === 0) {
+                    heroDeleting = false;
+                    heroIdx = (heroIdx + 1) % heroPhrases.length;
+                    setTimeout(typeHero, 500);
+                } else {
+                    setTimeout(typeHero, 40);
+                }
+            }
+        }
 
-      <div class="setup-navigation">
-        <button id="prevStep" class="btn" style="margin-top: 0; background: gray;">Previous</button>
-        <span id="stepCounter" style="font-weight: bold; margin: 0 15px; color: var(--dark-text);">Step 1 of 5</span>
-        <button id="nextStep" class="btn" style="margin-top: 0;">Next</button>
-        <button id="finishSetup" class="btn" style="margin-top: 0; background: #28a745; display: none;">Finish</button>
-        <button id="restartSetup" class="btn" style="margin-top: 0; background: #6c757d; display: none;">Restart</button>
-      </div>
+        // Terminal demo commands
+        const terminalOutputEl = document.getElementById('terminalOutput');
 
-    </div>
-  </div>
-</section>
+        const commands = [
+            { text: 'superhxpro visualize "MyProject" 2', delay: 0.5 },
+            { text: 'MyProject/', delay: 0.1, isResponse: true },
+            { text: '├── src/', delay: 0.1, isResponse: true },
+            { text: '└── docs/', delay: 0.1, isResponse: true },
+            { text: 'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', delay: 0.5 },
+            { text: 'Renamed 78 files.', delay: 0.3, isResponse: true },
+            { text: 'superhxpro deep-clone "Archive" "Backup_Archive"', delay: 1 },
+            { text: 'Clone complete! 1.2 GB copied.', delay: 0.5, isResponse: true }
+        ];
+
+        let cmdIdx = 0;
+
+        function runTerminalDemo() {
+            if (cmdIdx >= commands.length) {
+                setTimeout(() => {
+                    terminalOutputEl.innerHTML = '';
+                    cmdIdx = 0;
+                    runTerminalDemo();
+                }, 2000);
+                return;
+            }
+
+            const cmd = commands[cmdIdx];
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('terminal-line');
+            if (cmd.isResponse) {
+                lineDiv.classList.add('terminal-response');
+                lineDiv.textContent = cmd.text;
+                terminalOutputEl.appendChild(lineDiv);
+                scrollTerminal();
+                cmdIdx++;
+                setTimeout(runTerminalDemo, cmd.delay * 1000);
+            } else {
+                lineDiv.innerHTML = `<span class="prompt">$ </span><span class="command-text"></span><span class="cursor"></span>`;
+                terminalOutputEl.appendChild(lineDiv);
+                scrollTerminal();
+
+                const commandTextSpan = lineDiv.querySelector('.command-text');
+                const cursorSpan = lineDiv.querySelector('.cursor');
+                let charPos = 0;
+                const fullText = cmd.text;
+
+                function typeChar() {
+                    if (charPos < fullText.length) {
+                        commandTextSpan.textContent += fullText.charAt(charPos);
+                        charPos++;
+                        scrollTerminal();
+                        setTimeout(typeChar, 40);
+                    } else {
+                        if (cursorSpan) cursorSpan.remove(); // Remove cursor after typing
+                        cmdIdx++;
+                        setTimeout(runTerminalDemo, cmd.delay * 1000);
+                    }
+                }
+                setTimeout(typeChar, 100);
+            }
+        }
+
+        function scrollTerminal() {
+            const el = document.getElementById('terminalOutput');
+            el.scrollTop = el.scrollHeight;
+        }
+
+        // Get Started Steps Navigation
+        const setupSteps = document.querySelectorAll('.setup-step');
+        const prevStepBtn = document.getElementById('prevStep');
+        const nextStepBtn = document.getElementById('nextStep');
+        const restartSetupBtn = document.getElementById('restartSetup');
+        const stepCounterSpan = document.getElementById('stepCounter');
+        const stepDots = document.querySelectorAll('.step-dot');
+
+        let currentSetupStep = 0;
+
+        function showSetupStep(stepIndex) {
+            setupSteps.forEach((step, idx) => {
+                step.classList.toggle('active', idx === stepIndex);
+                step.style.display = (idx === stepIndex) ? 'block' : 'none'; // Ensure visibility controlled by class
+            });
+
+            stepDots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === stepIndex);
+            });
+
+            prevStepBtn.disabled = (stepIndex === 0);
+            nextStepBtn.disabled = (stepIndex === setupSteps.length - 1);
+
+            if (stepIndex === setupSteps.length - 1) {
+                nextStepBtn.style.display = 'none';
+                restartSetupBtn.style.display = 'inline-block';
+            } else {
+                nextStepBtn.style.display = 'inline-block';
+                restartSetupBtn.style.display = 'none';
+            }
+            stepCounterSpan.textContent = `Step ${stepIndex + 1} of ${setupSteps.length}`;
+            document.getElementById('get-started').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        prevStepBtn.addEventListener('click', () => {
+            if (currentSetupStep > 0) {
+                currentSetupStep--;
+                showSetupStep(currentSetupStep);
+            }
+        });
+
+        nextStepBtn.addEventListener('click', () => {
+            if (currentSetupStep < setupSteps.length - 1) {
+                currentSetupStep++;
+                showSetupStep(currentSetupStep);
+            }
+        });
+
+        restartSetupBtn.addEventListener('click', () => {
+            currentSetupStep = 0;
+            showSetupStep(currentSetupStep);
+        });
+
+        stepDots.forEach(dot => {
+            dot.addEventListener('click', (event) => {
+                const targetStep = parseInt(event.target.dataset.stepTarget);
+                currentSetupStep = targetStep;
+                showSetupStep(currentSetupStep);
+            });
+        });
 
 
-<footer>
- <div class="footer-social">
-  <a href="https://github.com/Suresh-pyhobbyist/superhelperhxpro" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
- </div>
- <p>© 2024 SuperHelperXPro. All rights reserved.</p>
-</footer>
+        // Command Accordion Logic
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.closest('.accordion-item');
+                const content = item.querySelector('.accordion-content');
+                const icon = header.querySelector('.accordion-icon');
 
-<script>
-// Typing effect for hero section
-const typewriterEl = document.getElementById('typewriter');
-const heroPhrases = [
-  'superhxpro visualize "My Holiday Pics" 3',
-  'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', // Added 'true' for recursive renaming
-  'superhxpro deep-clone "MyProject" "Backup_2024"',
-  'superhxpro auto-cleanup "Downloads" ageDays 90', // Changed '--age 90d' to 'ageDays 90'
-  'superhxpro search-tag "report" "important"' // Changed 'search' to 'search-tag' and '--tag' to a direct argument
-];
+                // Close all other open accordions
+                document.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                    if (activeItem !== item) {
+                        activeItem.classList.remove('active');
+                        activeItem.querySelector('.accordion-content').style.maxHeight = '0';
+                        activeItem.querySelector('.accordion-icon').classList.remove('fa-chevron-up');
+                        activeItem.querySelector('.accordion-icon').classList.add('fa-chevron-down');
+                    }
+                });
 
-let heroIdx = 0;
-let heroCharIdx = 0;
-let heroDeleting = false;
+                // Toggle current accordion
+                item.classList.toggle('active');
+                if (item.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    content.style.maxHeight = '0';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
 
-function typeHero() {
- const current = heroPhrases[heroIdx];
- if (!heroDeleting) {
-  // Typing
-  typewriterEl.textContent = current.substring(0, heroCharIdx + 1);
-  heroCharIdx++;
-  if (heroCharIdx === current.length) {
-   // Pause at the end
-   heroDeleting = true;
-   setTimeout(typeHero, 1500);
-  } else {
-   setTimeout(typeHero, 70);
-  }
- } else {
-  // Deleting
-  typewriterEl.textContent = current.substring(0, heroCharIdx - 1);
-  heroCharIdx--;
-  if (heroCharIdx === 0) {
-   heroDeleting = false;
-   heroIdx = (heroIdx + 1) % heroPhrases.length;
-   setTimeout(typeHero, 500);
-  } else {
-   setTimeout(typeHero, 40);
-  }
- }
-}
+        // Copy button functionality
+        document.querySelectorAll('.code-install-wrapper .copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const codeBlock = button.previousElementSibling.querySelector('code');
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    const originalIcon = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        button.innerHTML = originalIcon;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
 
-// Initialize hero typing
-document.addEventListener('DOMContentLoaded', () => {
- typeHero();
- runTerminalDemo();
-});
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navbarMenu = document.querySelector('.navbar-menu');
 
-// Terminal demo commands
-const outputEl = document.getElementById('terminalOutput');
+        menuToggle.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
 
-const commands = [
- { text: 'superhxpro visualize "MyProject" 2', delay: 0.5 },
- { text: 'MyProject/', delay: 0.1 },
- { text: '├── src/', delay: 0.1 },
- { text: '└── docs/', delay: 0.1 },
- { text: 'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', delay: 0.5 },
- { text: 'Renamed 78 files.', delay: 0.3 },
- { text: 'superhxpro deep-clone "Archive" "Backup_Archive"', delay: 1 },
- { text: 'Clone complete! 1.2 GB copied.', delay: 0.5 }
-];
+        // Close mobile menu when a link is clicked
+        navbarMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbarMenu.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+            });
+        });
 
-let cmdIdx = 0;
 
-function runTerminalDemo() {
- if (cmdIdx >= commands.length) {
-  setTimeout(() => {
-   outputEl.innerHTML = '';
-   cmdIdx = 0;
-   runTerminalDemo();
-  }, 2000);
-  return;
- }
+        // Initialize on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            typeHero(); // Start hero typing effect
+            runTerminalDemo(); // Start terminal demo
+            showSetupStep(currentSetupStep); // Show first setup step
+        });
+    </script>
 
- const cmd = commands[cmdIdx];
- const lineDiv = document.createElement('div');
- lineDiv.innerHTML = `> ${cmd.text}<span class="cursor"></span>`;
- outputEl.appendChild(lineDiv);
- scrollTerminal();
-
- const fullText = `> ${cmd.text}`;
- const cursorSpan = lineDiv.querySelector('.cursor');
- let charPos = 0;
-
- function typeChar() {
-  if (charPos < fullText.length) {
-   cursorSpan.insertAdjacentText('beforebegin', fullText.charAt(charPos));
-   charPos++;
-   scrollTerminal();
-   setTimeout(typeChar, 40);
-  } else {
-   cursorSpan.remove();
-   cmdIdx++;
-   setTimeout(runTerminalDemo, cmd.delay * 1000);
-  }
- }
- setTimeout(typeChar, 100);
-}
-
-function scrollTerminal() {
- const el = document.getElementById('terminal');
- el.scrollTop = el.scrollHeight;
-}
-</script>
-
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-
-  document.addEventListener('DOMContentLoaded', () => {
-  const steps = document.querySelectorAll('.setup-step');
-  const prevBtn = document.getElementById('prevStep');
-  const nextBtn = document.getElementById('nextStep');
-  const finishBtn = document.getElementById('finishSetup');
-  const restartBtn = document.getElementById('restartSetup');
-  const stepCounter = document.getElementById('stepCounter');
-
-  let currentStep = 0; // Start at the first step (index 0)
-
-  function showStep(stepIndex) {
-    // Ensure stepIndex is within bounds
-    if (stepIndex < 0 || stepIndex >= steps.length) {
-      console.error("Invalid step index:", stepIndex);
-      return;
-    }
-
-    // Hide all steps first
-    steps.forEach(step => {
-      step.style.display = 'none';
-    });
-
-    // Show the current step
-    steps[stepIndex].style.display = 'flex'; // Use flex to retain original display properties if using flexbox for centering content
-
-    // Update button states and visibility
-    prevBtn.disabled = (stepIndex === 0); // Disable Previous on first step
-    nextBtn.disabled = (stepIndex === steps.length - 1); // Disable Next on last step
-
-    // Show Finish button only on the last step, otherwise hide it
-    if (stepIndex === steps.length - 1) {
-      finishBtn.style.display = 'inline-block'; // Or 'flex' if it needs to align with flex container
-      nextBtn.style.display = 'none'; // Hide Next button on the last step
-    } else {
-      finishBtn.style.display = 'none';
-      nextBtn.style.display = 'inline-block'; // Show Next button on other steps
-    }
-
-    // Always show Restart button after the first step for a quick restart option
-    if (stepIndex > 0) {
-      restartBtn.style.display = 'inline-block';
-    } else {
-      restartBtn.style.display = 'none';
-    }
-
-    // Update step counter
-    stepCounter.textContent = `Step ${stepIndex + 1} of ${steps.length}`;
-
-    // Optional: Scroll to top of the section when changing steps
-    document.getElementById('get-started').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // --- Event Listeners ---
-
-  nextBtn.addEventListener('click', () => {
-    if (currentStep < steps.length - 1) {
-      currentStep++;
-      showStep(currentStep);
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentStep > 0) {
-      currentStep--;
-      showStep(currentStep);
-    }
-  });
-
-  finishBtn.addEventListener('click', () => {
-    // You can define what "Finish" does here.
-    // For example, navigate to another section, show a final message, or enable more features.
-    alert('Setup complete! You can now explore SuperHelperXPro.'); // Simple alert for demonstration
-    // Optionally, disable all navigation buttons after finishing
-    prevBtn.disabled = true;
-    nextBtn.disabled = true;
-    finishBtn.disabled = true;
-    // You might also want to show a "Go to Dashboard" or "Explore Features" link
-    // instead of just an alert.
-  });
-
-  restartBtn.addEventListener('click', () => {
-    currentStep = 0; // Reset to the first step
-    showStep(currentStep);
-  });
-
-  // Initialize: show the first step when the page loads
-  showStep(currentStep);
-});
-</script>
-
-</body></html>
+</body>
+</html>
