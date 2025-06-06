@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="superhelperhxpro",
-    version="1.0.1",
+    version="1.0.4",
     author="Suresh-pyhobbyist",
     description="An intelligent command-line assistant to organize and manage files effortlessly.",
     long_description=open("docs/readme.md", encoding="utf-8").read(),
