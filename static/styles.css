@@ -1,4 +1,5 @@
 /* Base Styles & Typography */
+
 :root {
     --primary-blue: #007bff; /* A vibrant blue for primary actions */
     --secondary-blue: #0056b3; /* Darker blue for hover states */
@@ -14,6 +15,21 @@
     --border-color: #e0e0e0; /* Light border for subtle separation */
     --shadow-light: rgba(0, 0, 0, 0.08);
     --shadow-medium: rgba(0, 0, 0, 0.15);
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --accent-color: #28a745;
+    --bg-color: #f0f2f5; /* Lighter background */
+            --text-color: #343a40;
+            --heading-color: #212529;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+            --terminal-bg: #282c34;
+            --terminal-text: #abb2bf;
+            --terminal-prompt: #61afef; /* Blue for prompt */
+            --terminal-command: #c678dd; /* Purple for command */
+            --terminal-output-success: #98c379; /* Green for success */
+            --terminal-output-info: #e5c07b; /* Yellow for info */
+            --terminal-error: #e06c75; /* Red for errors */
 }
 
 *, *::before, *::after {
@@ -1054,3 +1070,200 @@ hr {
         font-size: 0.85rem;
     }
 }
+
+
+        /* Persona-specific headings for terminal demo */
+        .persona-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding: 10px 20px;
+            background-color: #e6ffe6; /* Light green background */
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Terminal Demo Styling */
+        .terminal-container {
+            background-color: var(--terminal-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            max-width: 900px; /* Wider terminal */
+            margin: 40px auto;
+            overflow: hidden;
+            position: relative;
+            min-height: 400px; /* Taller terminal */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            padding-bottom: 18px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .terminal-header .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .terminal-header .button {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #ff5f56; /* Red */
+        }
+
+        .terminal-header .button.yellow { background-color: #ffbd2e; }
+        .terminal-header .button.green { background-color: #27c93f; }
+
+        .terminal-header .title {
+            color: #aaa;
+            font-family: 'Fira Code', monospace;
+            font-size: 1em;
+            margin-left: 20px;
+        }
+
+        .terminal-output {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.05em; /* Slightly larger text */
+            color: var(--terminal-text);
+            white-space: pre-wrap;
+            word-break: break-all;
+            flex-grow: 1; /* Allows output to fill space */
+            overflow-y: auto; /* Enable scrolling for long output */
+            padding-right: 10px; /* Space for scrollbar */
+        }
+
+        .terminal-output .prompt {
+            color: var(--terminal-prompt);
+            margin-right: 8px;
+        }
+
+        .terminal-output .command {
+            color: var(--terminal-command);
+        }
+
+        .terminal-output .output-line {
+            display: block;
+            margin-bottom: 7px; /* More space between lines */
+            opacity: 0;
+            animation: fadeIn 0.6s forwards; /* Slower fade-in */
+        }
+
+        .terminal-output .output-line.success {
+            color: var(--terminal-output-success);
+        }
+        .terminal-output .output-line.info {
+            color: var(--terminal-output-info);
+        }
+        .terminal-output .output-line.error {
+            color: var(--terminal-error);
+        }
+
+        .terminal-output .cursor {
+            display: inline-block;
+            width: 9px;
+            height: 1.05em;
+            background-color: var(--terminal-text);
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+            margin-left: 3px;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent; }
+            50% { background-color: var(--terminal-text); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translate(-50%, 50px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        footer {
+            background-color: var(--heading-color);
+            color: white;
+            text-align: center;
+            padding: 35px 0;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .terminal-container {
+                max-width: 95%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 3em;
+            }
+            header p {
+                font-size: 1.1em;
+            }
+            h2 {
+                font-size: 2.2em;
+            }
+            .persona-heading {
+                font-size: 1.6em;
+            }
+            .terminal-output {
+                font-size: 0.95em;
+            }
+            .terminal-container {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+            header p {
+                font-size: 0.95em;
+            }
+            .section {
+                padding: 30px 15px;
+            }
+            h2 {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            .persona-heading {
+                font-size: 1.3em;
+            }
+            .terminal-output {
+                font-size: 0.85em;
+            }
+            .terminal-container {
+                min-height: 300px;
+                padding: 15px;
+            }
+        }
