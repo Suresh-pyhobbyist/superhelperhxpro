@@ -499,67 +499,6 @@
             }
         }
 
-        // // Terminal demo commands
-        // const terminalOutputEl = document.getElementById('terminalOutput');
-
-        // const commands = [
-        //     { text: 'superhxpro visualize "MyProject" 2', delay: 0.5 },
-        //     { text: 'MyProject/', delay: 0.1, isResponse: true },
-        //     { text: '├── src/', delay: 0.1, isResponse: true },
-        //     { text: '└── docs/', delay: 0.1, isResponse: true },
-        //     { text: 'superhxpro batch-rename "Photos" "(IMG_)(\\d+)" "Vacation_\\2" true', delay: 0.5 },
-        //     { text: 'Renamed 78 files.', delay: 0.3, isResponse: true },
-        //     { text: 'superhxpro deep-clone "Archive" "Backup_Archive"', delay: 1 },
-        //     { text: 'Clone complete! 1.2 GB copied.', delay: 0.5, isResponse: true }
-        // ];
-
-        // let cmdIdx = 0;
-
-        // function runTerminalDemo() {
-        //     if (cmdIdx >= commands.length) {
-        //         setTimeout(() => {
-        //             terminalOutputEl.innerHTML = '';
-        //             cmdIdx = 0;
-        //             runTerminalDemo();
-        //         }, 2000);
-        //         return;
-        //     }
-
-        //     const cmd = commands[cmdIdx];
-        //     const lineDiv = document.createElement('div');
-        //     lineDiv.classList.add('terminal-line');
-        //     if (cmd.isResponse) {
-        //         lineDiv.classList.add('terminal-response');
-        //         lineDiv.textContent = cmd.text;
-        //         terminalOutputEl.appendChild(lineDiv);
-        //         scrollTerminal();
-        //         cmdIdx++;
-        //         setTimeout(runTerminalDemo, cmd.delay * 1000);
-        //     } else {
-        //         lineDiv.innerHTML = `<span class="prompt">$ </span><span class="command-text"></span><span class="cursor"></span>`;
-        //         terminalOutputEl.appendChild(lineDiv);
-        //         scrollTerminal();
-
-        //         const commandTextSpan = lineDiv.querySelector('.command-text');
-        //         const cursorSpan = lineDiv.querySelector('.cursor');
-        //         let charPos = 0;
-        //         const fullText = cmd.text;
-
-        //         function typeChar() {
-        //             if (charPos < fullText.length) {
-        //                 commandTextSpan.textContent += fullText.charAt(charPos);
-        //                 charPos++;
-        //                 scrollTerminal();
-        //                 setTimeout(typeChar, 40);
-        //             } else {
-        //                 if (cursorSpan) cursorSpan.remove(); // Remove cursor after typing
-        //                 cmdIdx++;
-        //                 setTimeout(runTerminalDemo, cmd.delay * 1000);
-        //             }
-        //         }
-        //         setTimeout(typeChar, 100);
-        //     }
-        // }
 
         function scrollTerminal() {
             const el = document.getElementById('terminalOutput');
