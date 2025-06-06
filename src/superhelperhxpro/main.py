@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import shutil
+import collections
 import time
 import re
 import hashlib
@@ -22,28 +23,34 @@ def _normalize_path(path):
         return os.getcwd()
     return os.path.abspath(path)
 
+
 def _load_metadata(folder_path):
     """
     Loads metadata from a hidden JSON file in the specified folder.
-    Returns an empty dictionary if the file doesn't exist or is corrupted.
+    Returns an empty dictionary if the file doesn't exist, is empty, or is corrupted.
     """
     normalized_folder_path = _normalize_path(folder_path)
     metadata_path = os.path.join(normalized_folder_path, METADATA_FILE)
     
+    # If the metadata file doesn't exist, there's no metadata to load.
     if not os.path.exists(metadata_path):
         return {}
 
     try:
         with open(metadata_path, 'r', encoding='utf-8') as f:
-            content = f.read().strip()
-            if content:
-                return json.loads(content)
-            else:
-                print(f"[WARNING] Metadata file '{metadata_path}' is empty. Returning empty dict.")
-                # If the file is empty, it should be deleted on next save if metadata remains empty.
-                return {}
+            content = f.read().strip() # Read content and remove leading/trailing whitespace
+            
+            # If the file is empty after stripping whitespace, treat it as if no metadata exists.
+            # No warning is needed here, as _save_metadata should prevent empty files from persisting.
+            if not content: 
+                return {} 
+            
+            # Attempt to parse the content as JSON.
+            return json.loads(content) 
+            
     except json.JSONDecodeError:
-        print(f"[ERROR] Metadata file '{metadata_path}' is corrupted. Returning empty dict and attempting to back up/reset.")
+        # Catch JSON parsing errors (e.g., malformed JSON).
+        print(f"[ERROR] Metadata file '{metadata_path}' is corrupted or malformed. Returning empty dict and attempting to back up/reset.")
         try:
             timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
             shutil.copy2(metadata_path, f"{metadata_path}.corrupted_{timestamp}.bak")
@@ -52,12 +59,14 @@ def _load_metadata(folder_path):
             print(f"[ERROR] Failed to back up corrupted metadata file: {e}")
         return {}
     except IOError as e:
+        # Catch general I/O errors (e.g., permission issues).
         print(f"[ERROR] Reading metadata from '{metadata_path}': {e}")
         return {}
     except Exception as e:
+        # Catch any other unexpected errors during the process.
         print(f"[ERROR] Unexpected error loading metadata from '{metadata_path}': {e}")
         return {}
-    
+       
 def _save_metadata(folder_path, metadata):
     """
     Saves metadata to a hidden JSON file in the specified folder.
@@ -513,19 +522,27 @@ def tag_file(file_path, add_tags_str, remove_tags_str, recursive):
     print(f"Finished tagging. Processed {processed_count} file(s).")
 
 
-def search_tag(folder, tag):
+def search_tag(folder, tag_str): # Renamed 'tag' to 'tag_str' for clarity
     """
-    Finds files with a specific tag.
+    Finds files with any of the specified tags (OR logic).
+    Tags can be comma-separated.
     """
     if not os.path.isdir(folder):
         print(f"Error: Folder '{folder}' not found.")
         return
 
-    print(f"Searching for files with tag '{tag}' in '{folder}'...")
+    # 1. Split the input tag string into individual tags and strip whitespace
+    search_tags = {t.strip() for t in tag_str.split(',') if t.strip()}
+
+    if not search_tags:
+        print("No tags provided for search.")
+        return
+
+    print(f"Searching for files with any of tags {list(search_tags)} in '{folder}'...")
     found_count = 0
 
     for root, _, files in os.walk(folder):
-        normalized_root = _normalize_path(root) # Normalize root for metadata operations
+        normalized_root = _normalize_path(root)
         metadata = _load_metadata(normalized_root)
         for filename in files:
             if filename == METADATA_FILE:
@@ -533,14 +550,137 @@ def search_tag(folder, tag):
             
             file_key = filename
             if file_key in metadata and "tags" in metadata[file_key]:
-                if tag in metadata[file_key]["tags"]: # This looks for an exact tag match
-                    print(f"  Found: {os.path.join(root, filename)} (Tags: {', '.join(metadata[file_key]['tags'])})")
+                file_tags = set(metadata[file_key]["tags"]) # Convert file's tags to a set for efficient checking
+                
+                # 2. Check for OR logic: if any search tag is in file_tags
+                if any(st in file_tags for st in search_tags):
+                    print(f"  Found: {os.path.join(root, filename)} (Tags: {', '.join(file_tags)})")
                     found_count += 1
-    print(f"Finished. Found {found_count} file(s) with tag '{tag}'.")
+    print(f"Finished. Found {found_count} file(s) with matching tags.")
+
+
+
+def file_activity_graph(folder):
+    """
+    Analyzes file activity (creation/modification) in a folder from last year to now
+    and displays it as a highly detailed ASCII table, listing activity for each day
+    and ALL specific files modified on that day.
+    """
+    if not os.path.isdir(folder):
+        print(f"Error: Folder '{folder}' not found.")
+        return
+
+    print(f"Analyzing file activity in '{folder}' in detail from last year to now...\n")
+
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=364) # Go back 364 days to cover 365 days total
+
+    # Dictionary to store activity: Key: date (YYYY-MM-DD), Value: list of file paths
+    daily_activity = collections.defaultdict(list)
+    
+    # Iterate through all files in the folder (including subfolders)
+    for root, _, files in os.walk(folder):
+        for filename in files:
+            filepath = os.path.join(root, filename)
+            if not os.path.isfile(filepath) or filename == METADATA_FILE:
+                continue
+            
+            try:
+                mod_timestamp = os.path.getmtime(filepath)
+                mod_date = datetime.fromtimestamp(mod_timestamp)
+
+                if start_date.date() <= mod_date.date() <= end_date.date():
+                    daily_activity[mod_date.strftime("%Y-%m-%d")].append(filepath)
+            except OSError as e:
+                # print(f"Warning: Could not access file '{filepath}': {e}")
+                continue
+
+    if not daily_activity and start_date.date() <= end_date.date():
+        print("No file activity found in the specified period.")
+        return
+
+    # --- Generate ASCII Detailed Table ---
+    
+    print("Detailed File Activity (Last 365 Days):\n")
+
+    current_date_iterator = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    current_month = None
+
+    weekday_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+    # Calculate max width for Files Modified count column
+    max_count_value = max(len(files_list) for files_list in daily_activity.values()) if daily_activity else 0
+    FILES_COUNT_COL_WIDTH = max(len(str(max_count_value)), len("Files Modified")) # Ensure header fits
+    
+    # Table column widths (fixed for date/day, dynamic for count)
+    DATE_COL_WIDTH = 10  # YYYY-MM-DD
+    DAY_COL_WIDTH = 9    # Wednesday
+
+    # Total table width based on columns and borders
+    TABLE_WIDTH = DATE_COL_WIDTH + DAY_COL_WIDTH + FILES_COUNT_COL_WIDTH + (3 * 2) + 2 # cols + separators + ends
+
+    while current_date_iterator <= end_date:
+        if current_date_iterator.month != current_month:
+            current_month = current_date_iterator.month
+            month_year_str = current_date_iterator.strftime("%B %Y")
+            
+            print("\n" + "=" * TABLE_WIDTH)
+            print(f"| {month_year_str.ljust(TABLE_WIDTH - 4)} |") # Month header
+            print("-" * TABLE_WIDTH)
+            print(f"| {'Date'.ljust(DATE_COL_WIDTH)} | {'Day'.ljust(DAY_COL_WIDTH)} | {'Files Modified'.ljust(FILES_COUNT_COL_WIDTH)} |")
+            print("-" * TABLE_WIDTH)
+
+        date_str = current_date_iterator.strftime("%Y-%m-%d")
+        day_name = weekday_names[current_date_iterator.weekday()]
+        files_modified_on_day = daily_activity.get(date_str, [])
+        count = len(files_modified_on_day)
+
+        # Print the main daily row
+        print(f"| {date_str.ljust(DATE_COL_WIDTH)} | {day_name.ljust(DAY_COL_WIDTH)} | {str(count).ljust(FILES_COUNT_COL_WIDTH)} |")
+        
+        # If there are files, list ALL of them below
+        if count > 0:
+            print(f"  Files:") # Header for files list
+            
+            for filepath in files_modified_on_day:
+                print(f"    - {filepath}") # Indented list item
+        
+        # Add a separator for the next day/month entry
+        print("-" * TABLE_WIDTH)
+            
+        current_date_iterator += timedelta(days=1)
+    
+    print("=" * TABLE_WIDTH) # End of total table
+    print(f"\nAnalysis Period: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
 
 def search_meta(folder, json_query_str):
     """
-    Finds files by size, date, type, using extended metadata.
+    Finds files based on a rich set of metadata criteria.
+    The query is a JSON string where keys map to file metadata properties.
+
+    Supported query keys and their formats:
+    - "name": "partial_filename" (case-insensitive partial match)
+    - "path": "partial_path" (case-insensitive partial match of the full file path)
+    - "size": {"gt": 1024, "lt": 1048576, "eq": 50000} (in bytes, can use any combination)
+              OR 50000 (direct number for exact equality)
+    - "type": "mp3" (single file extension, e.g., "jpg", "pdf", "txt")
+              OR ["jpg", "png", "gif"] (list of extensions for OR logic)
+    - "last_modified": {"after": "2024-01-01T00:00:00", "before": "2024-12-31"} (ISO 8601 format)
+    - "ageDays": 30 (integer, file must be older than N days)
+    - "tags": ["projectA", "confidential"] (list of tags, all must be present for AND logic)
+              OR "single_tag" (exact single tag match)
+    - "mood": "happy" (case-insensitive exact match for mood value)
+    - "mood_name": "Project Mood" (case-sensitive exact match for mood name)
+
+    Example Query:
+    "{
+        \"name\": \"report\",
+        \"type\": [\"pdf\", \"docx\"],
+        \"size\": {\"gt\": 1024, \"lt\": 1048576},
+        \"last_modified\": {\"after\": \"2024-01-01T00:00:00\"},
+        \"tags\": [\"projectA\", \"confidential\"],
+        \"mood\": \"happy\"
+    }"
     """
     if not os.path.isdir(folder):
         print(f"Error: Folder '{folder}' not found.")
@@ -548,15 +688,15 @@ def search_meta(folder, json_query_str):
 
     try:
         query = json.loads(json_query_str)
-    except json.JSONDecodeError:
-        print("Error: Invalid JSON query for search-meta.")
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON query for search-meta: {e}")
         return
 
-    print(f"Searching for files in '{folder}' with metadata query: {json.dumps(query, indent=2)}...")
+    print(f"Searching for files in '{folder}' with metadata query:\n{json.dumps(query, indent=2)}")
     found_count = 0
 
     for root, _, files in os.walk(folder):
-        normalized_root = _normalize_path(root) # Normalize root for metadata operations
+        normalized_root = _normalize_path(root)
         metadata_from_file = _load_metadata(normalized_root)
         
         for filename in files:
@@ -568,57 +708,148 @@ def search_meta(folder, json_query_str):
                 stat = os.stat(filepath)
                 file_size = stat.st_size
                 mod_time = datetime.fromtimestamp(stat.st_mtime)
-                file_type = os.path.splitext(filename)[1].lstrip('.').lower()
+                file_extension = os.path.splitext(filename)[1].lstrip('.').lower()
 
                 # Combine stat info with stored metadata
+                # Using datetime objects for date/time fields for easier comparison
                 file_metadata = {
                     "name": filename,
-                    "path": filepath,
+                    "path": filepath, # Full path
                     "size": file_size,
-                    "type": file_type,
-                    "last_modified": mod_time.isoformat(),
+                    "type": file_extension, # Actual file extension (e.g., 'jpg', 'mp3')
+                    "last_modified": mod_time,
                     "tags": metadata_from_file.get(filename, {}).get("tags", []),
                     "mood": metadata_from_file.get(filename, {}).get("mood", {}).get("value"),
                     "mood_name": metadata_from_file.get(filename, {}).get("mood", {}).get("name")
                 }
 
-                # Evaluate conditions
                 match = True
-                if "type" in query and file_metadata["type"] != query["type"].lower():
-                    match = False
-                
-                if "size" in query:
-                    if "gt" in query["size"] and not (file_size > query["size"]["gt"]):
-                        match = False
-                    if "lt" in query["size"] and not (file_size < query["size"]["lt"]):
-                        match = False
-                
-                if "ageDays" in query:
-                    required_age = int(query["ageDays"])
-                    if not _is_file_older_than(filepath, required_age):
-                        match = False
-
-                if "tags" in query:
-                    if isinstance(query["tags"], list):
-                        if not all(tag in file_metadata["tags"] for tag in query["tags"]):
+                for query_key, query_value in query.items():
+                    # Handle specific query keys that require custom logic
+                    if query_key == "name":
+                        if query_value.lower() not in file_metadata["name"].lower():
                             match = False
-                    elif isinstance(query["tags"], str) and query["tags"] not in file_metadata["tags"]:
-                             match = False
-                
-                if "mood" in query and file_metadata.get("mood") != query["mood"].lower():
-                    match = False
-                
-                if "mood_name" in query and file_metadata.get("mood_name") != query["mood_name"]:
-                    match = False
+                            break
+                    elif query_key == "path":
+                        if query_value.lower() not in file_metadata["path"].lower():
+                            match = False
+                            break
+                    elif query_key == "size":
+                        if isinstance(query_value, dict):
+                            if "gt" in query_value and not (file_size > query_value["gt"]):
+                                match = False
+                                break
+                            if "lt" in query_value and not (file_size < query_value["lt"]):
+                                match = False
+                                break
+                            if "eq" in query_value and not (file_size == query_value["eq"]):
+                                match = False
+                                break
+                        elif isinstance(query_value, (int, float)): # Direct number for exact match
+                            if file_size != query_value:
+                                match = False
+                                break
+                        else:
+                            print(f"Warning: 'size' query requires a number or an object with 'gt', 'lt', 'eq' keys.")
+                            match = False
+                            break
+                    elif query_key == "type":
+                        # Supports single string or list of strings (OR logic for list)
+                        if isinstance(query_value, str):
+                            if file_metadata["type"] != query_value.lower():
+                                match = False
+                                break
+                        elif isinstance(query_value, list):
+                            if file_metadata["type"] not in [t.lower() for t in query_value]:
+                                match = False
+                                break
+                        else:
+                            print(f"Warning: 'type' query requires a string or a list of strings.")
+                            match = False
+                            break
+                    elif query_key == "last_modified":
+                        if isinstance(query_value, dict):
+                            if "after" in query_value:
+                                try:
+                                    # Allow YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS
+                                    after_date = datetime.fromisoformat(query_value["after"])
+                                    if not (file_metadata["last_modified"] >= after_date): # >= to include the start of the day
+                                        match = False
+                                        break
+                                except ValueError:
+                                    print(f"Warning: Invalid 'after' date format for '{query_key}'. Use ISO format (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS).")
+                                    match = False
+                                    break
+                            if "before" in query_value:
+                                try:
+                                    before_date = datetime.fromisoformat(query_value["before"])
+                                    if not (file_metadata["last_modified"] <= before_date): # <= to include the end of the day if just date is given
+                                        match = False
+                                        break
+                                except ValueError:
+                                    print(f"Warning: Invalid 'before' date format for '{query_key}'. Use ISO format (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS).")
+                                    match = False
+                                    break
+                        else:
+                            print(f"Warning: 'last_modified' query requires an object with 'after' and/or 'before' keys.")
+                            match = False
+                            break
+                    elif query_key == "ageDays":
+                        try:
+                            required_age = int(query_value)
+                            if not _is_file_older_than(filepath, required_age):
+                                match = False
+                                break
+                        except ValueError:
+                            print(f"Warning: 'ageDays' value must be an integer.")
+                            match = False
+                            break
+                    elif query_key == "tags":
+                        file_tags_set = set(file_metadata["tags"])
+                        if isinstance(query_value, list):
+                            # AND logic: all queried tags must be in the file's tags
+                            if not all(tag in file_tags_set for tag in query_value):
+                                match = False
+                                break
+                        elif isinstance(query_value, str):
+                            # Exact single tag match
+                            if query_value not in file_tags_set:
+                                match = False
+                                break
+                        else:
+                            print(f"Warning: 'tags' query requires a string or list of strings.")
+                            match = False
+                            break
+                    elif query_key == "mood":
+                        if file_metadata.get("mood") != query_value.lower():
+                            match = False
+                            break
+                    elif query_key == "mood_name":
+                        if file_metadata.get("mood_name") != query_value: # Case-sensitive
+                            match = False
+                            break
+                    else:
+                        # For any other key not explicitly handled, assume direct equality if present
+                        # This makes it extensible without writing an 'elif' for every new simple field
+                        if file_metadata.get(query_key) != query_value:
+                            match = False
+                            break
+                    
+                    if not match: # If any condition failed, no need to check further
+                        break
 
                 if match:
-                    print(f"  Found: {filepath} (Size: {file_size} bytes, Modified: {mod_time.strftime('%Y-%m-%d')}, Type: .{file_type}, Tags: {', '.join(file_metadata['tags'])})")
+                    # Format last_modified for display
+                    display_mod_time = file_metadata["last_modified"].strftime('%Y-%m-%d %H:%M:%S')
+                    print(f"  Found: {filepath} (Size: {file_size} bytes, Modified: {display_mod_time}, Type: .{file_metadata['type']}, Tags: {', '.join(file_metadata['tags'])})")
                     found_count += 1
 
             except OSError as e:
                 print(f"Error accessing file '{filepath}': {e}")
-            except ValueError:
-                print(f"Error processing query for '{filepath}'. Check query values.")
+            except ValueError as e:
+                print(f"Error processing query/file '{filepath}': {e}. Check query values or file data types.")
+            except Exception as e:
+                print(f"An unexpected error occurred for '{filepath}': {e}")
 
     print(f"Finished. Found {found_count} file(s) matching criteria.")
 
@@ -842,13 +1073,12 @@ def folder_mood_set(folder, mood, name):
     print(f"Mood '{mood}' ({name if name else 'No name'}) set for folder '{folder}'.")
 
 
-# --- Main Function ---
 def main():
     parser = argparse.ArgumentParser(
         description="SuperHelperXPro: Your smart file assistant that helps you sort, fix, and manage your files with simple commands!"
     )
 
-    subparsers = parser.add_subparsers(dest="command", help="Available commands", required=True)
+    subparsers = parser.add_subparsers(dest="command", required=True)
 
     # visualize
     visualize_parser = subparsers.add_parser("visualize", help="See the folder tree.")
@@ -857,10 +1087,14 @@ def main():
         "max_depth", type=int, nargs="?", default=1, help="Max depth for visualization (default: 1)."
     )
 
+    # file-activity-graph
+    file_activity_parser = subparsers.add_parser("file-activity-graph", help="Visualize file activity over the last year.")
+    file_activity_parser.add_argument("folder", help="The folder to analyze.")
+
     # batch-rename
     batch_rename_parser = subparsers.add_parser("batch-rename", help="Rename many files at once.")
     batch_rename_parser.add_argument("folder", help="The folder to perform renaming in.")
-    batch_rename_parser.add_argument("regex", help="The regular expression to match. Use raw string for patterns (e.g., r'(IMG_)(\d+)').")
+    batch_rename_parser.add_argument("regex", help="The regex pattern for renaming.")
     batch_rename_parser.add_argument("replacement", help="The replacement string.")
     batch_rename_parser.add_argument(
         "recursive",
@@ -871,16 +1105,12 @@ def main():
     )
 
     # deep-clone
-    deep_clone_parser = subparsers.add_parser(
-        "deep-clone", help="Copy a whole folder and contents."
-    )
+    deep_clone_parser = subparsers.add_parser("deep-clone", help="Copy a whole folder and contents.")
     deep_clone_parser.add_argument("src", help="Source folder.")
     deep_clone_parser.add_argument("dest", help="Destination folder.")
 
     # conditional-move-copy
-    conditional_parser = subparsers.add_parser(
-        "conditional-move-copy", help="Move or copy files by rules."
-    )
+    conditional_parser = subparsers.add_parser("conditional-move-copy", help="Move or copy files by rules.")
     conditional_parser.add_argument("src", help="Source folder.")
     conditional_parser.add_argument("dest", help="Destination folder.")
     conditional_parser.add_argument(
@@ -913,15 +1143,9 @@ def main():
     # tag-file
     tag_parser = subparsers.add_parser("tag-file", help="Add or remove tags on files.")
     tag_parser.add_argument("file_path", help="The file or folder to tag.")
-    tag_parser.add_argument(
-        "--add", default="", help="Comma-separated tags to add."
-    )
-    tag_parser.add_argument(
-        "--remove", default="", help="Comma-separated tags to remove."
-    )
-    tag_parser.add_argument(
-        "--recursive", action="store_true", help="Apply to all files in subfolders if a folder is specified."
-    )
+    tag_parser.add_argument("--add", default="", help="Comma-separated tags to add.")
+    tag_parser.add_argument("--remove", default="", help="Comma-separated tags to remove.")
+    tag_parser.add_argument("--recursive", action="store_true", help="Apply to all files in subfolders if a folder is specified.")
 
     # search-tag
     search_tag_parser = subparsers.add_parser("search-tag", help="Find files with a specific tag.")
@@ -929,7 +1153,7 @@ def main():
     search_tag_parser.add_argument("tag", help="The tag to search for.")
 
     # search-meta
-    search_meta_parser = subparsers.add_parser("search-meta", help="Find files by size, date, type, using extended metadata. Query as JSON string (e.g., '{\"type\": \"txt\", \"size\": {\"gt\": 1024}}').")
+    search_meta_parser = subparsers.add_parser("search-meta", help="Find files by size, date, type, using extended metadata.")
     search_meta_parser.add_argument("folder", help="The folder to search in.")
     search_meta_parser.add_argument("json_query", help="JSON string for the query.")
 
@@ -947,25 +1171,25 @@ def main():
     export_map_parser.add_argument("folder", help="The folder to map.")
     export_map_parser.add_argument("json_file", help="The output JSON file path.")
 
-    # apply-rules (conceptual)
+    # apply-rules
     apply_rules_parser = subparsers.add_parser("apply-rules", help="Run automation rules (conceptual).")
     apply_rules_parser.add_argument("folder", help="The folder to apply rules to.")
 
-    # schedule-command (conceptual)
+    # schedule-command
     schedule_parser = subparsers.add_parser("schedule-command", help="Schedule a command to run later (conceptual).")
     schedule_parser.add_argument("name", help="A name for the scheduled command.")
     schedule_parser.add_argument("delay_ms", type=int, help="Delay in milliseconds before execution.")
     schedule_parser.add_argument("command_args", nargs=argparse.REMAINDER, help="The command and its arguments to schedule.")
 
-    # undo-actions (conceptual)
-    undo_parser = subparsers.add_parser("undo-actions", help="Revert last actions (conceptual).")
+    # undo-actions
+    undo_parser = subparsers.add_parser("undo-actions", help="Reverts last actions (conceptual).")
     undo_parser.add_argument("steps", type=int, nargs="?", default=1, help="Number of steps to undo (default: 1).")
-    
+
     # folder-mood-set
     folder_mood_set_parser = subparsers.add_parser("folder-mood-set", help="Set an emotional label for a folder.")
     folder_mood_set_parser.add_argument("folder", help="The folder to set the mood for.")
     folder_mood_set_parser.add_argument("mood", help="The mood value (e.g., 'Happy', 'Work', 'Archived').")
-    folder_mood_set_parser.add_argument("--name", help="An optional name for the mood (e.g., 'Project Alpha Progress').", default=None)
+    folder_mood_set_parser.add_argument("--name", help="An optional name for the mood.", default=None)
 
     # folder-mood-get
     folder_mood_get_parser = subparsers.add_parser("folder-mood-get", help="Get the emotional label for a folder or search by mood.")
@@ -973,12 +1197,13 @@ def main():
     folder_mood_get_parser.add_argument("--recursive", action="store_true", help="Scan subfolders recursively.")
     folder_mood_get_parser.add_argument("--filter-mood", help="Filter folders by mood name or value (case-insensitive).", default=None)
 
-
     args = parser.parse_args()
 
-    # --- Command Execution Logic ---
+    # Dispatch commands
     if args.command == "visualize":
         visualize_folder(args.folder, args.max_depth)
+    elif args.command == "file-activity-graph":
+        file_activity_graph(args.folder)
     elif args.command == "batch-rename":
         batch_rename(args.folder, args.regex, args.replacement, args.recursive)
     elif args.command == "deep-clone":
@@ -1011,6 +1236,8 @@ def main():
         folder_mood_set(args.folder, args.mood, args.name)
     elif args.command == "folder-mood-get":
         folder_mood_get(args.folder, args.recursive, args.filter_mood)
+    else:
+        print("Unknown command.")
 
 if __name__ == "__main__":
     main()
