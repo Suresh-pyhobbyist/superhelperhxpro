@@ -10,6 +10,7 @@ Organizing files can feel like a never-ending battle. But with SuperHelperXPro, 
 
 -----
 
+
 ## 🔮 Unleash the Magic: Commands at Your Fingertips\! 🦸‍♂️🦸‍♀️
 
 Discover the incredible capabilities SuperHelperXPro brings to your daily file management:
@@ -24,7 +25,8 @@ Discover the incredible capabilities SuperHelperXPro brings to your daily file m
 | **`superhxpro deduplicate <folder> [--dry-run]`** | **Find and remove duplicate files** using smart hashing. 🕵️‍♀️ | `superhxpro deduplicate "MyPhotos" --dry-run`\<br/\>Shows you duplicates without deleting them first. | Free up massive amounts of storage by eliminating redundant files\! 🌬️ |
 | **`superhxpro tag-file <filePath> [--add <tags>] [--remove <tags>] [--recursive]`** | **Add or remove custom tags** on your files for better organization. 🏷️ | `superhxpro tag-file "Report.pdf" --add "urgent,work"`\<br/\>Tags `Report.pdf` as "urgent" and "work". | Organize your files by custom categories and contexts\! 🗂️ |
 | **`superhxpro search-tag <folder> <tag>`** | **Quickly find all files** with a specific tag. 🔍 | `superhxpro search-tag "Projects" "urgent"`\<br/\>Lists all files tagged "urgent" within your "Projects" folder. | Pinpoint important files in seconds\! ⚡ |
-| **`superhxpro search-meta <folder> <jsonQuery>`** | **Perform powerful searches** based on file size, date, type, or custom tags and moods\! 🧠 | `superhxpro search-meta "." "{\"type\":\"image\",\"size\":{\"gt\":5000000}}"`\<br/\>Finds all images larger than 5MB in the current directory. | Unlock advanced search capabilities\! 🔎 |
+| **`superhxpro search-meta <folder> <jsonQuery>`** | **Perform powerful searches** based on file size, date, type, custom tags, or mood. 🧠 | `superhxpro search-meta "." "{\"type\":[\"jpg\",\"png\"],\"size\":{\"gt\":5000000},\"last_modified\":{\"after\":\"2024-01-01\"}}"`\<br/\>Finds JPG/PNG images larger than 5MB, modified after Jan 1, 2024, in the current directory. | Unlock advanced, precise file discovery\! 🔎 |
+| **`superhxpro file-activity-graph <folder>`** | **Visualize daily file activity** over the last year as an ASCII calendar heatmap. 📈 | `superhxpro file-activity-graph "Documents"`\<br/\>Shows a visual graph of when files were modified in your "Documents" folder. | See your productivity trends at a glance\! 📅 |
 | **`superhxpro exec-script <script.js/py> [args...]`** | **Run your own custom JavaScript or Python scripts** directly through SuperHelperXPro. 🤖 | `superhxpro exec-script "cleanup_script.py" '{"folder":"Temp"}'`\<br/\>Executes your Python script `cleanup_script.py` with custom arguments. | Extend SuperHelperXPro with your own automation logic\! ⚙️ |
 | **`superhxpro health-check <folder>`** | **Scan your folders for issues** like broken links or inaccessible files. 🩺 | `superhxpro health-check "SharedDocs"`\<br/\>Identifies potential problems in your shared documents. | Keep your data healthy and reliable\! ❤️‍🩹 |
 | **`superhxpro export-map <folder> <jsonFile>`** | **Generate a detailed JSON catalog** of your entire file structure and metadata. 📊 | `superhxpro export-map "ClientPhotos" "client_photos_catalog.json"`\<br/\>Creates `client_photos_catalog.json` with all your photo details. | Get a comprehensive overview of your digital assets\! 📈 |
@@ -36,30 +38,29 @@ Discover the incredible capabilities SuperHelperXPro brings to your daily file m
 
 -----
 
-# 🚀 Getting Started with SuperHelperHXPro
+## 🚀 Get Started: It's Super Easy via npm\!
 
-## 📌 Installation
+SuperHelperXPro is designed for seamless integration into your command-line workflow.
 
-Install `superhelperhxpro` globally using npm:
+1.  **Install Python**: SuperHelperXPro's powerful core is written in Python. Ensure you have Python 3 installed on your system. If not, download it from [python.org](https://www.python.org/downloads/).
 
-```bash
-npm install -g superhelperhxpro
-```
+2.  **Install SuperHelperXPro via npm**: Open your terminal or command prompt and run:
 
-## 🛠️ Usage
+    ```bash
+    npm install -g superhelperhxpro
+    ```
 
-Once installed, you can use the `superhxpro` command in your terminal:
+    This command installs SuperHelperXPro globally, making the `superhxpro` command available anywhere on your system.
 
-```bash
-superhxpro visualize . 2
-```
-This will display your folder structure up to **2 levels deep**.
+3.  **Run Commands**: Now you're ready to unleash SuperHelperXPro\! Just type `superhxpro` followed by your desired command:
 
-### 🔧 Example Commands
+    ```bash
+    superhxpro visualize . 2
+    ```
 
-```bash
-superhxpro batch-rename "Downloads" "(IMG_)(\d+)" "Vacation_\2" true
-```
+    (This will show you the current folder's structure up to 2 levels deep\!)
+
+That's it\! You're all set to transform your messy files into an organized masterpiece with **SuperHelperXPro**.
 
 -----
 
@@ -67,4 +68,4 @@ superhxpro batch-rename "Downloads" "(IMG_)(\d+)" "Vacation_\2" true
 
 © 2024 SuperHelperXPro. All rights reserved.
 SuperHelperXPro is provided as-is for personal and professional use.
-Use responsibly and enjoy organizing your files
+Use responsibly and enjoy organizing your files.
