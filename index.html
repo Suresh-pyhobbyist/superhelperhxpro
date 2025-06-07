@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <link href="static/styles.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
     </head>
 <body>
 
     <header class="main-header" aria-labelledby="site-title">
     <nav class="navbar container" aria-label="Main Navigation">
         <a href="#hero" class="navbar-brand" id="site-title">
-            <img src="assets/images/logo.svg" alt="SuperHelperXPro Logo" class="logo">
+            <img src="/assets/images/logo.svg" alt="SuperHelperXPro Logo" class="logo">
             <span class="brand-text">SuperHelperXPro</span>
         </a>
 
@@ -121,229 +121,253 @@
         <hr>
 
         <section id="commands-showcase" class="commands-showcase-section">
-            <div class="container">
-                <h2 class="section-title">🔮 Unleash the Magic: <span class="highlight">Commands at Your Fingertips!</span> 🦸‍♂️🦸‍♀️</h2>
-                <p class="section-subtitle">Discover the incredible capabilities SuperHelperXPro brings to your daily file management:</p>
+    <div class="container">
+        <h2 class="section-title">🔮 Unleash the Magic: <span class="highlight">Commands at Your Fingertips!</span> 🦸‍♂️🦸‍♀️</h2>
+        <p class="section-subtitle">Discover the incredible capabilities SuperHelperXPro brings to your daily file management:</p>
 
-                <div class="commands-accordion">
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro visualize &lt;folder&gt; [maxDepth]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Visualize your folder tree with a clear, visual map. 🌳</p>
-                            <p><b>Example:</b> <pre>superhxpro visualize "Photos" 2</pre> Shows your "Photos" folder and its subfolders up to 2 levels deep.</p>
-                            <p><b>Why It’s Great:</b> Gain instant clarity on your file structure! 🗺️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro batch-rename &lt;folder&gt; &lt;regex&gt; &lt;replacement&gt; [recursive]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Rename multiple files in one go using powerful regular expressions. 🏷️</p>
-                            <p><b>Example:</b> <pre>superhxpro batch-rename "Downloads" "(IMG_)(\\d+)" "Vacation_\\2" true</pre> Transforms `IMG_001.jpg` into `Vacation_001.jpg` across your "Downloads" folder, including subfolders.</p>
-                            <p><b>Why It’s Great:</b> Save hours of tedious manual renaming! ⏱️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro deep-clone &lt;src&gt; &lt;dest&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Create a perfect, complete copy of an entire folder and its contents. 👯</p>
-                            <p><b>Example:</b> <pre>superhxpro deep-clone "ProjectX" "ProjectX_Backup"</pre> Creates a full duplicate of "ProjectX" as "ProjectX_Backup".</p>
-                            <p><b>Why It’s Great:</b> Effortlessly back up or duplicate projects! 💾</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro conditional-move-copy &lt;src&gt; &lt;dest&gt; &lt;type&gt; &lt;value&gt; [--copy]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Move or copy files based on smart rules like age or size. 📐</p>
-                            <p><b>Example:</b> <pre>superhxpro conditional-move-copy "Downloads" "Archive" ageDays 180</pre> Moves files in "Downloads" older than 180 days to your "Archive" folder. Add `--copy` to copy instead of move.</p>
-                            <p><b>Why It’s Great:</b> Keep your folders tidy and relevant automatically! 🧹</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro auto-cleanup &lt;folder&gt; &lt;criteria&gt; [value]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Automatically delete old, temporary, or unwanted files to free up space. 🗑️</p>
-                            <p><b>Example:</b> <pre>superhxpro auto-cleanup "Temp" ageDays 7</pre> Deletes files older than 7 days in your "Temp" folder.</p>
-                            <p><b>Why It’s Great:</b> Reclaim valuable disk space with ease! ♻️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro deduplicate &lt;folder&gt; [--dry-run]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Find and remove duplicate files using smart hashing. 🕵️‍♀️</p>
-                            <p><b>Example:</b> <pre>superhxpro deduplicate "MyPhotos" --dry-run</pre> Shows you duplicates without deleting them first.</p>
-                            <p><b>Why It’s Great:</b> Free up massive amounts of storage by eliminating redundant files! 🌬️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro tag-file &lt;filePath&gt; [--add &lt;tags&gt;] [--remove &lt;tags&gt;] [--recursive]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Add or remove custom tags on your files for better organization. 🏷️</p>
-                            <p><b>Example:</b> <pre>superhxpro tag-file "Report.pdf" --add "urgent,work"</pre> Tags `Report.pdf` as "urgent" and "work".</p>
-                            <p><b>Why It’s Great:</b> Organize your files by custom categories and contexts! 🗂️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro search-tag &lt;folder&gt; &lt;tag&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Quickly find all files with a specific tag. 🔍</p>
-                            <p><b>Example:</b> <pre>superhxpro search-tag "Projects" "urgent"</pre> Lists all files tagged "urgent" within your "Projects" folder.</p>
-                            <p><b>Why It’s Great:</b> Pinpoint important files in seconds! ⚡</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro search-meta &lt;folder&gt; &lt;jsonQuery&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Perform powerful searches based on file size, date, type, custom tags, or mood. 🧠</p>
-                            <p><b>Example:</b> <pre>superhxpro search-meta "." "{\"type\":[\"jpg\",\"png\"],\"size\":{\"gt\":5000000},\"last_modified\":{\"after\":\"2024-01-01\"}}"</pre> Finds JPG/PNG images larger than 5MB, modified after Jan 1, 2024, in the current directory.</p>
-                            <p><b>Why It’s Great:</b> Unlock advanced, precise file discovery! 🔎</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro file-activity-graph &lt;folder&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Visualize daily file activity over the last year as an ASCII calendar heatmap. 📈</p>
-                            <p><b>Example:</b> <pre>superhxpro file-activity-graph "Documents"</pre> Shows a visual graph of when files were modified in your "Documents" folder.</p>
-                            <p><b>Why It’s Great:</b> See your productivity trends at a glance! 📅</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro exec-script &lt;script.js/py&gt; [args...]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Run your own custom JavaScript or Python scripts directly through SuperHelperXPro. 🤖</p>
-                            <p><b>Example:</b> <pre>superhxpro exec-script "cleanup_script.py" '{"folder":"Temp"}'</pre> Executes your Python script `cleanup_script.py` with custom arguments.</p>
-                            <p><b>Why It’s Great:</b> Extend SuperHelperXPro with your own automation logic! ⚙️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro health-check &lt;folder&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Scan your folders for issues like broken links or inaccessible files. 🩺</p>
-                            <p><b>Example:</b> <pre>superhxpro health-check "SharedDocs"</pre> Identifies potential problems in your shared documents.</p>
-                            <p><b>Why It’s Great:</b> Keep your data healthy and reliable! ❤️‍🩹</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro export-map &lt;folder&gt; &lt;jsonFile&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Generate a detailed JSON catalog of your entire file structure and metadata. 📊</p>
-                            <p><b>Example:</b> <pre>superhxpro export-map "ClientPhotos" "client_photos_catalog.json"</pre> Creates `client_photos_catalog.json` with all your photo details.</p>
-                            <p><b>Why It’s Great:</b> Get a comprehensive overview of your digital assets! 📈</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro apply-rules &lt;folder&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Run predefined automation rules to streamline your workflows. (Conceptual) ⚙️</p>
-                            <p><b>Example:</b> <pre>superhxpro apply-rules "Inbox"</pre> Triggers any custom rules set up for your "Inbox" folder.</p>
-                            <p><b>Why It’s Great:</b> Automate your routine file management tasks! 🎯</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro schedule-command &lt;name&gt; &lt;delay_ms&gt; &lt;command_args...&gt;</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Set commands to run at a later time. (Conceptual) ⏰</p>
-                            <p><b>Example:</b> <pre>superhxpro schedule-command "daily_cleanup" 86400000 auto-cleanup Temp ageDays 7</pre> Schedules the "auto-cleanup" command to run after 24 hours (86,400,000 milliseconds).</p>
-                            <p><b>Why It’s Great:</b> Automate repetitive tasks without lifting a finger! 🗓️</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro undo-actions [steps]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Revert previous actions for safety and peace of mind. (Conceptual) ↩️</p>
-                            <p><b>Example:</b> <pre>superhxpro undo-actions 1</pre> Attempts to reverse the last action taken.</p>
-                            <p><b>Why It’s Great:</b> Work with confidence, knowing you can rewind! 🔙</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro folder-mood-set &lt;folder&gt; &lt;mood&gt; [--name &lt;name&gt;]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Assign emotional labels to your folders. 😊</p>
-                            <p><b>Example:</b> <pre>superhxpro folder-mood-set "VacationPhotos" happy --name "SummerTrip"</pre> Labels "VacationPhotos" as "happy" and names the mood "SummerTrip".</p>
-                            <p><b>Why It’s Great:</b> Make your folders feel special and organize by sentiment! 💖</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <h3><pre>superhxpro folder-mood-get &lt;folder&gt; [--recursive] [--filter-mood &lt;filter&gt;]</pre></h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <p><b>What It Does:</b> Retrieve emotional labels for folders. Use `--recursive` to scan subfolders, and `--filter-mood` to filter by mood value or name.</p>
-                            <p><b>Example:</b> <pre>superhxpro folder-mood-get "E:\" --recursive --filter-mood joyful</pre> Lists all folders on drive E: with a mood value or name containing "joyful".</p>
-                            <p><b>Why It’s Great:</b> Quickly find folders based on their emotional tags! ✨</p>
-                        </div>
-                    </div>
+        <div class="commands-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro visualize &lt;folder&gt; [maxDepth]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Visualize your folder tree with a clear, visual map. 🌳</p>
+                    <p><b>Example:</b> <pre>superhxpro visualize "Photos" 2</pre> Shows your "Photos" folder and its subfolders up to 2 levels deep.</p>
+                    <p><b>Why It’s Great:</b> Gain instant clarity on your file structure! 🗺️</p>
                 </div>
             </div>
-        </section>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro batch-rename &lt;folder&gt; &lt;regex&gt; &lt;replacement&gt; [recursive]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Rename multiple files in one go using powerful regular expressions. 🏷️</p>
+                    <p><b>Example:</b> <pre>superhxpro batch-rename "Downloads" "(IMG_)(\\d+)" "Vacation_\\2" true</pre> Transforms `IMG_001.jpg` into `Vacation_001.jpg` across your "Downloads" folder, including subfolders.</p>
+                    <p><b>Why It’s Great:</b> Save hours of tedious manual renaming! ⏱️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro deep-clone &lt;src&gt; &lt;dest&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Create a perfect, complete copy of an entire folder and its contents. 👯</p>
+                    <p><b>Example:</b> <pre>superhxpro deep-clone "ProjectX" "ProjectX_Backup"</pre> Creates a full duplicate of "ProjectX" as "ProjectX_Backup".</p>
+                    <p><b>Why It’s Great:</b> Effortlessly back up or duplicate projects! 💾</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro conditional-move-copy &lt;src&gt; &lt;dest&gt; &lt;type&gt; &lt;value&gt; [--copy]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Move or copy files based on smart rules like age or size. 📐</p>
+                    <p><b>Example:</b> <pre>superhxpro conditional-move-copy "Downloads" "Archive" ageDays 180</pre> Moves files in "Downloads" older than 180 days to your "Archive" folder. Add `--copy` to copy instead of move.</p>
+                    <p><b>Why It’s Great:</b> Keep your folders tidy and relevant automatically! 🧹</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro auto-cleanup &lt;folder&gt; &lt;criteria&gt; [value]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Automatically delete old, temporary, or unwanted files to free up space. 🗑️</p>
+                    <p><b>Example:</b> <pre>superhxpro auto-cleanup "Temp" ageDays 7</pre> Deletes files older than 7 days in your "Temp" folder.</p>
+                    <p><b>Why It’s Great:</b> Reclaim valuable disk space with ease! ♻️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro deduplicate &lt;folder&gt; [--dry-run]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Find and remove duplicate files using smart hashing. 🕵️‍♀️</p>
+                    <p><b>Example:</b> <pre>superhxpro deduplicate "MyPhotos" --dry-run</pre> Shows you duplicates without deleting them first.</p>
+                    <p><b>Why It’s Great:</b> Free up massive amounts of storage by eliminating redundant files! 🌬️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro tag-file &lt;filePath&gt; [--add &lt;tags&gt;] [--remove &lt;tags&gt;] [--recursive]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Add or remove custom tags on your files for better organization. 🏷️</p>
+                    <p><b>Example:</b> <pre>superhxpro tag-file "Report.pdf" --add "urgent,work"</pre> Tags `Report.pdf` as "urgent" and "work".</p>
+                    <p><b>Why It’s Great:</b> Organize your files by custom categories and contexts! 🗂️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro search-tag &lt;folder&gt; &lt;tag&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Quickly find all files with a specific tag. 🔍</p>
+                    <p><b>Example:</b> <pre>superhxpro search-tag "Projects" "urgent"</pre> Lists all files tagged "urgent" within your "Projects" folder.</p>
+                    <p><b>Why It’s Great:</b> Pinpoint important files in seconds! ⚡</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro search-meta &lt;folder&gt; &lt;jsonQuery&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Perform powerful searches based on file size, date, type, custom tags, or mood. 🧠</p>
+                    <p><b>Example:</b> <pre>superhxpro search-meta "." "{\"type\":[\"jpg\",\"png\"],\"size\":{\"gt\":5000000},\"last_modified\":{\"after\":\"2024-01-01\"}}"</pre> Finds JPG/PNG images larger than 5MB, modified after Jan 1, 2024, in the current directory.</p>
+                    <p><b>Why It’s Great:</b> Unlock advanced, precise file discovery! 🔎</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro file-activity-graph &lt;folder&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Visualize daily file activity over the last year as an ASCII calendar heatmap. 📈</p>
+                    <p><b>Example:</b> <pre>superhxpro file-activity-graph "Documents"</pre> Shows a visual graph of when files were modified in your "Documents" folder.</p>
+                    <p><b>Why It’s Great:</b> See your productivity trends at a glance! 📅</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro exec-script &lt;script.js/py&gt; [args...]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Run your own custom JavaScript or Python scripts directly through SuperHelperXPro. 🤖</p>
+                    <p><b>Example:</b> <pre>superhxpro exec-script "cleanup_script.py" '{"folder":"Temp"}'</pre> Executes your Python script `cleanup_script.py` with custom arguments.</p>
+                    <p><b>Why It’s Great:</b> Extend SuperHelperXPro with your own automation logic! ⚙️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro health-check &lt;folder&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Scan your folders for issues like broken links or inaccessible files. 🩺</p>
+                    <p><b>Example:</b> <pre>superhxpro health-check "SharedDocs"</pre> Identifies potential problems in your shared documents.</p>
+                    <p><b>Why It’s Great:</b> Keep your data healthy and reliable! ❤️‍🩹</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro export-map &lt;folder&gt; &lt;jsonFile&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Generate a detailed JSON catalog of your entire file structure and metadata. 📊</p>
+                    <p><b>Example:</b> <pre>superhxpro export-map "ClientPhotos" "client_photos_catalog.json"</pre> Creates `client_photos_catalog.json` with all your photo details.</p>
+                    <p><b>Why It’s Great:</b> Get a comprehensive overview of your digital assets! 📈</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro apply-rules &lt;folder&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Run predefined automation rules to streamline your workflows. (Conceptual) ⚙️</p>
+                    <p><b>Example:</b> <pre>superhxpro apply-rules "Inbox"</pre> Triggers any custom rules set up for your "Inbox" folder.</p>
+                    <p><b>Why It’s Great:</b> Automate your routine file management tasks! 🎯</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro schedule-command &lt;name&gt; &lt;delay_ms&gt; &lt;command_args...&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Set commands to run at a later time. (Conceptual) ⏰</p>
+                    <p><b>Example:</b> <pre>superhxpro schedule-command "daily_cleanup" 86400000 auto-cleanup Temp ageDays 7</pre> Schedules the "auto-cleanup" command to run after 24 hours (86,400,000 milliseconds).</p>
+                    <p><b>Why It’s Great:</b> Automate repetitive tasks without lifting a finger! 🗓️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro undo-actions [steps]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Revert previous actions for safety and peace of mind. (Conceptual) ↩️</p>
+                    <p><b>Example:</b> <pre>superhxpro undo-actions 1</pre> Attempts to reverse the last action taken.</p>
+                    <p><b>Why It’s Great:</b> Work with confidence, knowing you can rewind! 🔙</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro folder-mood-set &lt;folder&gt; &lt;mood&gt; [--name &lt;name&gt;]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Assign emotional labels to your folders. 😊</p>
+                    <p><b>Example:</b> <pre>superhxpro folder-mood-set "VacationPhotos" happy --name "SummerTrip"</pre> Labels "VacationPhotos" as "happy" and names the mood "SummerTrip".</p>
+                    <p><b>Why It’s Great:</b> Make your folders feel special and organize by sentiment! 💖</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro folder-mood-get &lt;folder&gt; [--recursive] [--filter-mood &lt;filter&gt;]</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Retrieve emotional labels for folders. Use `--recursive` to scan subfolders, and `--filter-mood` to filter by mood value or name.</p>
+                    <p><b>Example:</b> <pre>superhxpro folder-mood-get "E:\" --recursive --filter-mood joyful</pre> Lists all folders on drive E: with a mood value or name containing "joyful".</p>
+                    <p><b>Why It’s Great:</b> Quickly find folders based on their emotional tags! ✨</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro organize-photos &lt;src_folder&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Organize photos into a smart folder structure (YEAR/MONTH_NAME/DATE). 📸</p>
+                    <p><b>Example:</b> <pre>superhxpro organize-photos "Downloads/CameraRoll"</pre> Takes photos from "CameraRoll" and neatly sorts them into date-based folders under "Downloads/CameraRoll".</p>
+                    <p><b>Why It’s Great:</b> Instantly brings order to chaotic photo collections! 🖼️</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <h3><pre>superhxpro clutter-advisor &lt;folder&gt;</pre></h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <p><b>What It Does:</b> Get intelligent suggestions for files to clean up in a folder. 💡</p>
+                    <p><b>Example:</b> <pre>superhxpro clutter-advisor "C:/Users/YourName/Downloads"</pre> Scans your Downloads folder and provides smart recommendations for files to delete or archive.</p>
+                    <p><b>Why It’s Great:</b> Your personal assistant for a tidy computer, giving smart, actionable cleanup advice! 🧹</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
         <hr>
 
@@ -432,7 +456,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/images/logo.svg" alt="SuperHelperXPro Logo" class="logo-footer">
+                    <img src="/assets/images/logo.svg" alt="SuperHelperXPro Logo" class="logo-footer">
                     <h3>SuperHelperXPro</h3>
                 </div>
                 <div class="footer-links">
